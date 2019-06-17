@@ -28,12 +28,32 @@ import org.bytedeco.opencv.opencv_videoio.VideoCapture;
  */
 public class BallRecognizer extends Thread {
 
+	/**
+	 * 
+	 */
 	private VideoCapture grabber;
+	/**
+	 * 
+	 */
 	private Mat currentFrame;
 
+	/**
+	 * 
+	 */
 	private CanvasFrame frame;
+	/**
+	 * 
+	 */
 	private ToIplImage converter;
-
+	
+	/**
+	 * 
+	 */
+	private boolean rendering = false;
+	
+	/**
+	 * 
+	 */
 	public void recognizeBall() {
 		Mat gray = new Mat();
 		cvtColor(currentFrame, gray, COLOR_BGR2GRAY);
@@ -60,19 +80,22 @@ public class BallRecognizer extends Thread {
 
 	/**
 	 * Initializes some class' components, such as the {@link VideoCapture} instance
-	 * and the {@link CanvasFrame frame}.
-	 * This method must be <b>ALWAYS</b> called.
+	 * and the {@link CanvasFrame frame}. This method must be <b>ALWAYS</b> called.
 	 */
 	public void init() {
 		currentFrame = new Mat();
 		grabber = new VideoCapture(0);
 		grabber.open(0);
 
-		frame = new CanvasFrame("Pallettah-Recognition", 1);
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		converter = new ToIplImage();
 	}
 	
+	public void createPanel() {
+		frame = new CanvasFrame("Pallettah-Recognition", 1);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);		
+		rendering=true;
+	}
+
 	@Override
 	public void run() {
 		while (grabber.grab()) {
