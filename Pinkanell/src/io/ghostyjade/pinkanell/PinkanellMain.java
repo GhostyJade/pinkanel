@@ -15,13 +15,21 @@ public class PinkanellMain {
 		recognizer = new BallRecognizer();
 		createThreads();
 	}
-	
+
 	private void createThreads() {
 		EventQueue.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				window.create();
+			}
+		});
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				recognizer.init();
+				recognizer.start();
 			}
 		});
 	}

@@ -34,14 +34,6 @@ public class BallRecognizer extends Thread {
 	private CanvasFrame frame;
 	private ToIplImage converter;
 
-	public void loop() {
-		while (grabber.grab()) {
-			grabber.read(currentFrame);
-			recognizeBall();
-			render();
-		}
-	}
-
 	public void recognizeBall() {
 		Mat gray = new Mat();
 		cvtColor(currentFrame, gray, COLOR_BGR2GRAY);
@@ -67,7 +59,9 @@ public class BallRecognizer extends Thread {
 	}
 
 	/**
-	 * 
+	 * Initializes some class' components, such as the {@link VideoCapture} instance
+	 * and the {@link CanvasFrame frame}.
+	 * This method must be <b>ALWAYS</b> called.
 	 */
 	public void init() {
 		currentFrame = new Mat();
@@ -75,22 +69,20 @@ public class BallRecognizer extends Thread {
 		grabber.open(0);
 
 		frame = new CanvasFrame("Pallettah-Recognition", 1);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		converter = new ToIplImage();
+	}
+	
+	@Override
+	public void run() {
+		while (grabber.grab()) {
+			grabber.read(currentFrame);
+			recognizeBall();
+			render();
+		}
 	}
 
 	public void render() {
 		frame.showImage(converter.convert(currentFrame));
-	}
-
-	public static void mainnnnnnnn(String[] args) {
-		try {
-			BallRecognizer alternative = new BallRecognizer();
-			alternative.init();
-			alternative.loop();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
 	}
 }
