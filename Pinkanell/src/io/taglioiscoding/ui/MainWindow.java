@@ -38,6 +38,7 @@ public class MainWindow {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		frame.setResizable(false);
+		frame.setUndecorated(true);
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(0, 0, (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
