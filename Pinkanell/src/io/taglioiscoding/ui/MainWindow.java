@@ -3,6 +3,8 @@ package io.taglioiscoding.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,8 +25,6 @@ public class MainWindow {
 	private JLabel lblVmax;
 	private JLabel valueVmed;
 	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor;
-	
-	
 
 	/**
 	 * Create the application.
@@ -44,7 +44,7 @@ public class MainWindow {
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		frame.setResizable(false);
-		//XXX frame.setUndecorated(true);
+		frame.setUndecorated(true);
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setBackground(Color.WHITE);
 		frame.setBounds(0, 0, (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
@@ -105,12 +105,37 @@ public class MainWindow {
 		scoreDivisor.setFont(new Font("Lucida Grande", Font.BOLD, 99));
 		scoreDivisor.setBounds(657, 702, 73, 96);
 		frame.getContentPane().add(scoreDivisor);
+
+		frame.addKeyListener(closeWindow());
+	}
+
+	/**
+	 * Close the application
+	 * 
+	 * @author GhostyJade
+	 */
+	private KeyListener closeWindow() {
+		return new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+					System.exit(0);
+			}
+		};
 	}
 
 	public void changeToCameraPreview() {
 		panel.setBorder(new LineBorder(Color.ORANGE, 3));
-		panel.setBounds(0, 0,((Toolkit.getDefaultToolkit().getScreenSize().width) /2 - 10),
-				640);
+		panel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 
 		lblVmax.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		lblVmax.setBounds(61, 654, 358, 72);
@@ -141,14 +166,13 @@ public class MainWindow {
 		scoreDivisor.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreDivisor.setFont(new Font("Lucida Grande", Font.BOLD, 99));
 		scoreDivisor.setBounds(1023, 730, 73, 96);
-		
+
 		JPanel cameraPanel = new JPanel();
 		cameraPanel.setBorder(new LineBorder(new Color(0, 255, 0), 3));
-		cameraPanel.setBounds(panel.getWidth(), 0 ,((Toolkit.getDefaultToolkit().getScreenSize().width) /2 - 10),
-				 640);
+		cameraPanel.setBounds(panel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 		frame.getContentPane().add(cameraPanel);
 	}
-	
+
 	/**
 	 * Show the window.
 	 * 
