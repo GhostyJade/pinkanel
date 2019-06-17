@@ -3,21 +3,30 @@ package io.ghostyjade.opencv;
 import static org.bytedeco.opencv.global.opencv_imgproc.COLOR_BGR2GRAY;
 import static org.bytedeco.opencv.global.opencv_imgproc.HOUGH_GRADIENT;
 import static org.bytedeco.opencv.global.opencv_imgproc.HoughCircles;
+import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
-import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 
 import javax.swing.WindowConstants;
 
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
+import org.bytedeco.opencv.global.opencv_imgproc;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.opencv_core.Point;
 import org.bytedeco.opencv.opencv_core.Scalar;
 import org.bytedeco.opencv.opencv_imgproc.Vec3fVector;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
 
-public class Main {
+/**
+ * This class provides methods to recognize a ball from a Webcam stream.
+ * 
+ * @author GhostyJade
+ * @since v1.0
+ * @see opencv_imgproc#HoughCircles(Mat, Vec3fVector, int, double, double,
+ *      double, double, int, int) HoughCircles
+ */
+public class BallRecognizer extends Thread {
 
 	private VideoCapture grabber;
 	private Mat currentFrame;
@@ -57,14 +66,9 @@ public class Main {
 		}
 	}
 
-	public String buildString(float[] p) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < p.length; i++) {
-			sb.append(p[i] + " ");
-		}
-		return sb.toString();
-	}
-
+	/**
+	 * 
+	 */
 	public void init() {
 		currentFrame = new Mat();
 		grabber = new VideoCapture(0);
@@ -79,10 +83,9 @@ public class Main {
 		frame.showImage(converter.convert(currentFrame));
 	}
 
-	public static void main(String[] args) {
-		// Load the native library.
+	public static void mainnnnnnnn(String[] args) {
 		try {
-			Main alternative = new Main();
+			BallRecognizer alternative = new BallRecognizer();
 			alternative.init();
 			alternative.loop();
 		} catch (Exception e) {

@@ -116,4 +116,13 @@ public class MainWindow {
 		label_14.setBounds(233, 201, 11, 37);
 		frame.getContentPane().add(label_14);
 	}
+	
+	/**
+	 * Show the window.
+	 * 
+	 * @author GhostyJade
+	 */
+	public void create() {
+		frame.setVisible(true);
+	}
 }
