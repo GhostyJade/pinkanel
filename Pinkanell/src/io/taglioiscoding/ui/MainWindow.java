@@ -1,11 +1,19 @@
 package io.taglioiscoding.ui;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
+
+/**
+ * 
+ * @author taglioIsCoding
+ *
+ */
 
 public class MainWindow {
 
@@ -15,17 +23,27 @@ public class MainWindow {
 
 	/**
 	 * Create the application.
+	 * 
+	 * 
+	 * 
 	 */
 	public MainWindow() {
 		initialize();
 	}
 
 	/**
+	 * 
 	 * Initialize the contents of the frame.
+	 * 
+	 * @author taglioIsCoding
+	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(new Color(238, 238, 238));
+		frame.setBackground(Color.WHITE);
+		frame.setBounds(0, 0, (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel label_4 = new JLabel("");
@@ -89,7 +107,7 @@ public class MainWindow {
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Lucida Grande", Font.PLAIN, 43));
 		
-		JLabel label_13 = new JLabel("");
+		
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(panel);
 		frame.getContentPane().add(label_5);
