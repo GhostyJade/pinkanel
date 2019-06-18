@@ -36,8 +36,15 @@ public class MathUtil extends Thread {
 	 */
 	private double maxSpeed;
 
+	/**
+	 * attributo in costante aggiornamento calcolato ogni volta che si ottiene un nuovo tempo
+	 * constantly updated attribute, calculate every time 
+	 */
 	private long time0;
 
+	/**
+	 * List that contains every speed calculated 
+	 */
 	private List<Double> speedValues = null;
 
 	/**
@@ -47,8 +54,8 @@ public class MathUtil extends Thread {
 		setName("MathUtilThread");
 		running = true;
 		maxSpeed = 0;
-		averageSpeed = 0; // togliere?
-		time0 = System.currentTimeMillis();
+		averageSpeed = 0; //togliere?
+		time0 = System.currentTimeMillis(); //togliere?
 	}
 
 	/**
@@ -76,32 +83,30 @@ public class MathUtil extends Thread {
 	 */
 	public void resetPoint() {
 		ballPositions.clear();
+		speedValues.clear();
 	}
 
 	/**
-	 * il metodo calcola il tempo passato dall'ultimo calcolo
+	 * calculate the time spent since the last calculation
 	 * 
-	 * @return la differenza tra il tempo attuale e quello ottenuto in precedenza
+	 * @return the difference between the current time and the previous one
 	 */
-	private double calculateTime() { // ricontrolla metodo
+	private double calculateTime() { //ricontrolla metodo
 		long timeDifference = System.currentTimeMillis() - time0;
-		time0 = System.currentTimeMillis();
 		return timeDifference;
 	}
 
 	/**
-	 * il metodo calcola lo spazio percorso dalla palla
+	 * calculate the space travelled by the ball
 	 * 
-	 * @return la differenza tra lo spazio attuale e quello ottenuto in precedenza
-	 *         se è possibile calcolarlo.
-	 * @return -1 se non può calcolare lo spazio.
+	 * @return the total space travelled by the ball
 	 */
 	private double calculateSpace() {
 		int pointX0 = 0;
 		int pointX1 = 0;
 		int pointY0 = 0;
 		int pointY1 = 0;
-		boolean calcoloPossibile = false;
+		double space = 0;
 
 		for (int i = 1; i < ballPositions.size(); i++) {
 
@@ -111,20 +116,24 @@ public class MathUtil extends Thread {
 			pointY0 = ballPositions.get(i).y();
 			pointY1 = ballPositions.get(i - 1).y();
 
-			calcoloPossibile = true;
+			int spaceDifferenceX = pointX0 - pointX1;
+			int spaceDifferenceY = pointY0 - pointY1;
+
+			space += Math.sqrt(Math.pow(spaceDifferenceX, 2) + Math.pow(spaceDifferenceY, 2));
+			
 		}
 
-		if (!calcoloPossibile)
-			return -1;
-
-		int spaceDifferenceX = pointX0 - pointX1;
-		int spaceDifferenceY = pointY0 - pointY1;
-
-		double space = Math.sqrt(Math.pow(spaceDifferenceX, 2) + Math.pow(spaceDifferenceY, 2));
+		
 		return space;
 	}
 
-	private static double calculateSpeed(double time, double space) {
+	/**
+	 * calculates the speed
+	 * @param time 
+	 * @param space
+	 * @return speed
+	 */
+	public static double calculateSpeed(double time, double space) {//rivedere se si può sostituire static
 		return (space / time);
 	}
 
