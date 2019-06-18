@@ -107,7 +107,7 @@ public class MathUtil extends Thread {
 		int pointY0 = 0;
 		int pointY1 = 0;
 		double space = 0;
-
+		
 		for (int i = 1; i < ballPositions.size(); i++) {
 
 			pointX0 = ballPositions.get(i).x();
