@@ -21,6 +21,12 @@ import io.ghostyjade.pinkanell.PinkanellMain;
  */
 
 public class MainWindow {
+	
+	/**
+	 * 
+	 * Initialize elements
+	 * 
+	 */
 
 	private JFrame frame;
 	private JPanel hotmapPanel, cameraPanel;
@@ -138,6 +144,12 @@ public class MainWindow {
 			}
 		};
 	}
+	
+	/**
+	 * 
+	 * Preview of the UI during the match
+	 * 
+	 */
 
 	public void changeToMatchPreview() {
 		lblVmax.setBounds(844, 93, 358, 72);
@@ -154,6 +166,12 @@ public class MainWindow {
 			frame.getContentPane().remove(cameraPanel);
 		PinkanellMain.getRecognizerInstance().destroyPanel();
 	}
+	
+	/**
+	 * 
+	 * Preview of camera vision that we used for debugging
+	 * 
+	 */
 
 	public void changeToCameraPreview() {
 		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
@@ -183,6 +201,12 @@ public class MainWindow {
 		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
 		frame.getContentPane().add(cameraPanel);
 	}
+	
+	/**
+	 * 
+	 * First test for the goal animation
+	 * 
+	 */
 
 	public void changeToGoal() {
 		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
