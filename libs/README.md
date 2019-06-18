@@ -9,4 +9,4 @@ You must include:
   - opencv-*platform*.jar (used to specify the natives)
 - RxTx library: 
   - rxtx-2.1.7.jar
-  - rxtx-native-*platform*.jar(used to specify the natives)
+  - rxtx-native-*platform*.jar (used to specify the natives)
