@@ -1,5 +1,6 @@
 package io.zaffino.math;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -18,7 +19,6 @@ public class MathUtil extends Thread {
 	/**
 	 * Is this thread running?
 	 */
-	@SuppressWarnings("unused")
 	private boolean running = false;
 
 	/**
@@ -37,15 +37,16 @@ public class MathUtil extends Thread {
 	private double maxSpeed;
 
 	/**
-	 * attributo in costante aggiornamento calcolato ogni volta che si ottiene un nuovo tempo
-	 * constantly updated attribute, calculate every time 
+	 * constantly updated attribute, calculate every time
 	 */
-	private long time0;
+	private long timeOnMathStart;
 
 	/**
-	 * List that contains every speed calculated 
+	 * Hold the space value between every two points.
 	 */
-	private List<Double> speedValues = null;
+	private List<Double> spaceValues = new CopyOnWriteArrayList<>();
+
+	private Point lastPoint;
 
 	/**
 	 * Class constructor.
@@ -53,9 +54,21 @@ public class MathUtil extends Thread {
 	public MathUtil() {
 		setName("MathUtilThread");
 		running = true;
-		maxSpeed = 0;
-		averageSpeed = 0; //togliere?
-		time0 = System.currentTimeMillis(); //togliere?
+		// add time calculation and calculate average
+	}
+
+	public void addPoint(Point p) {
+		if (lastPoint == null) {
+			timeOnMathStart = System.currentTimeMillis();
+			lastPoint = p;
+			return;
+		}
+		spaceValues.add(calculateSpace(p, lastPoint));
+		lastPoint = p;
+	}
+
+	private double calculateSpace(Point p0, Point p1) {
+		return Math.sqrt(Math.pow(p0.x() - p1.x(), 2) + Math.pow(p0.y() - p1.y(), 2));
 	}
 
 	/**
@@ -64,14 +77,14 @@ public class MathUtil extends Thread {
 	@Override
 	public void run() {
 		while (running) {
-			double space = calculateSpace();
-			double time = calculateTime();
+			// double space = calculateSpace();
+			// double time = calculateTime();
 
-			if (space != -1) {
-				speedValues.add(calculateSpeed(time, space));
-				calculateAverage();
-				calculateMaxValue();
-			}
+			// if (space != -1) {
+			// speedValues.add(calculateSpeed(time, space));
+			// calculateAverage();
+			// calculateMaxValue();
+			// }
 
 		}
 	}
@@ -83,7 +96,6 @@ public class MathUtil extends Thread {
 	 */
 	public void resetPoint() {
 		ballPositions.clear();
-		speedValues.clear();
 	}
 
 	/**
@@ -91,73 +103,47 @@ public class MathUtil extends Thread {
 	 * 
 	 * @return the difference between the current time and the previous one
 	 */
-	private double calculateTime() { //ricontrolla metodo
-		long timeDifference = System.currentTimeMillis() - time0;
+	// FIXME
+	private double calculateTime() { // ricontrolla metodo
+		long timeDifference = System.currentTimeMillis();// - time0;
 		return timeDifference;
 	}
 
 	/**
-	 * calculate the space travelled by the ball
+	 * calculate the space traveled by the ball
 	 * 
-	 * @return the total space travelled by the ball
+	 * @return the total space traveled by the ball
 	 */
-	private double calculateSpace() {
-		int pointX0 = 0;
-		int pointX1 = 0;
-		int pointY0 = 0;
-		int pointY1 = 0;
-		double space = 0;
-		
-		for (int i = 1; i < ballPositions.size(); i++) {
-
-			pointX0 = ballPositions.get(i).x();
-			pointX1 = ballPositions.get(i - 1).x();
-
-			pointY0 = ballPositions.get(i).y();
-			pointY1 = ballPositions.get(i - 1).y();
-
-			int spaceDifferenceX = pointX0 - pointX1;
-			int spaceDifferenceY = pointY0 - pointY1;
-
-			space += Math.sqrt(Math.pow(spaceDifferenceX, 2) + Math.pow(spaceDifferenceY, 2));
-			
-		}
-
-		
-		return space;
-	}
 
 	/**
 	 * calculates the speed
-	 * @param time 
+	 * 
+	 * @param time
 	 * @param space
 	 * @return speed
 	 */
-	public static double calculateSpeed(double time, double space) {//rivedere se si può sostituire static
+	private double calculateSpeed(double time, double space) {
 		return (space / time);
 	}
 
 	/**
-	 * Get the max speed
+	 * Get the max speed from
 	 */
-	public void calculateMaxValue() {
-		double max = 0;
-		for (int i = 0; i < speedValues.size(); i++) {
-			max = Math.max(max, speedValues.get(i));
-		}
-		maxSpeed = max;
+	// TODO this is completed
+	private void calculateMaxValue() {
+		maxSpeed = Collections.max(spaceValues);
 	}
 
 	/**
-	 * Get the average speed
+	 * Calculate the average speed
 	 */
-	public void calculateAverage() {
-		double average = 0;
-		for (int i = 0; i < speedValues.size(); i++) {
-			average += speedValues.get(i);
+	//TODO idk if this is done
+	private void calculateAverage() {
+		double spaceSum = 0;
+		for (int i = 0; i < spaceValues.size(); i++) {
+			spaceSum += spaceValues.get(i);
 		}
-		average /= speedValues.size();
-		averageSpeed = average;
+		averageSpeed = (spaceSum / (System.currentTimeMillis() - timeOnMathStart));
 	}
 
 	/**
