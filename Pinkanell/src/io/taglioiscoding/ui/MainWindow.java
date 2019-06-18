@@ -15,7 +15,7 @@ import javax.swing.border.LineBorder;
 /**
  * 
  * @author taglioIsCoding
- *
+ * @since v1.0
  */
 
 public class MainWindow {
@@ -25,7 +25,7 @@ public class MainWindow {
 	private JLabel lblVmax;
 	private JLabel valueVmed;
 	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor, goal;
-	
+
 	/**
 	 * Create the application.
 	 */
@@ -101,9 +101,6 @@ public class MainWindow {
 		frame.getContentPane().add(Player2);
 		frame.getContentPane().add(points1);
 		frame.getContentPane().add(points2);
-		
-		
-		
 
 		scoreDivisor = new JLabel(":");
 		scoreDivisor.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,22 +174,20 @@ public class MainWindow {
 		cameraPanel.setBounds(panel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 		frame.getContentPane().add(cameraPanel);
 	}
-	
+
 	public void changeToGoal() {
 		panel.setBorder(new LineBorder(Color.RED, 3));
-		//panel.setBounds(0, 0,(Toolkit.getDefaultToolkit().getScreenSize().width),
-		//		Toolkit.getDefaultToolkit().getScreenSize().height);
-		
+
 		goal = new JLabel("GOOOOOOOAL");
-		goal.setBounds(0,0,(Toolkit.getDefaultToolkit().getScreenSize().width),
-			Toolkit.getDefaultToolkit().getScreenSize().height);
+		goal.setBounds(0, 0, (Toolkit.getDefaultToolkit().getScreenSize().width),
+				Toolkit.getDefaultToolkit().getScreenSize().height);
 		goal.setVerticalAlignment(SwingConstants.CENTER);
 		goal.setHorizontalAlignment(SwingConstants.CENTER);
 		goal.setFont(new Font("Lucida Grande", Font.PLAIN, 150));
-		goal.setBorder(new LineBorder(Color.RED, 3));	
+		goal.setBorder(new LineBorder(Color.RED, 3));
 		frame.getContentPane().add(goal);
 	}
-	
+
 	/**
 	 * Show the window.
 	 * 

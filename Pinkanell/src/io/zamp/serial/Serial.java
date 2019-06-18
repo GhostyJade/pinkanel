@@ -1,27 +1,23 @@
 package io.zamp.serial;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.util.Enumeration;
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
-import java.util.Enumeration;
 
 /**
  *
  * @author Stage 2018/2019
+ * @since v1.0
  */
 public class Serial implements SerialPortEventListener {
-	
+
 	private SerialPort serialPort;
-	
+
 	private int point1, point2;
 
 	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac OS X
@@ -30,10 +26,8 @@ public class Serial implements SerialPortEventListener {
 	};
 
 	private BufferedReader input;
-	//private static OutputStream output;
 	private static final int TIME_OUT = 2000;
-	private static final int DATA_RATE = 9600;
-	private static final int BOAD_RATE = 9600;
+	private static final int BAUD_RATE = 9600;
 
 	public void initialize() {
 		CommPortIdentifier portId = null;
@@ -56,11 +50,10 @@ public class Serial implements SerialPortEventListener {
 		try {
 			serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
 
-			serialPort.setSerialPortParams(BOAD_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
+			serialPort.setSerialPortParams(BAUD_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
 					SerialPort.PARITY_NONE);
 
 			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-			//output = serialPort.getOutputStream();
 
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
@@ -74,9 +67,7 @@ public class Serial implements SerialPortEventListener {
 			try {
 				String inputLine = input.readLine();
 				assignPoint(inputLine);
-				//System.out.println(inputLine);
 			} catch (Exception e) {
-				//System.err.println(e.toString());
 			}
 		}
 	}
@@ -103,33 +94,15 @@ public class Serial implements SerialPortEventListener {
 		t.start();
 		System.out.println("Serial Comms Started");
 	}
-	
-	private void assignPoint(String s) {
-		
-		if(s.startsWith("1")) {point1 = Integer.parseInt(s.substring(1, s.length()));System.out.println("Giocatore 1 " + point1);}
-		else {point2 = Integer.parseInt(s.substring(1, s.length())); System.out.println("Giocatore 2 " + point2);}
-	}
-	
-	/*
 
-	public synchronized void send(int b) {
-		try {
-			output.write(b);
-		} catch (Exception e) {
-			System.err.println(e.toString());
+	private void assignPoint(String s) {
+
+		if (s.startsWith("1")) {
+			point1 = Integer.parseInt(s.substring(1, s.length()));
+			System.out.println("Giocatore 1 " + point1);
+		} else {
+			point2 = Integer.parseInt(s.substring(1, s.length()));
+			System.out.println("Giocatore 2 " + point2);
 		}
 	}
-*/
-	/*
-	public synchronized int read() {
-		int b = 0;
-		try {
-			b = input.read();
-		} catch (Exception e) {
-			System.err.println(e.toString());
-			b = -1;
-		}
-		return b;
-	}
-	*/
 }
