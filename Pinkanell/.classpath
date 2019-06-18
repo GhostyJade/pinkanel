@@ -8,6 +8,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-macOS"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-MacOS"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RxTxLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RXTXlib"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
