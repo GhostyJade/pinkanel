@@ -6,7 +6,7 @@ You must include:
   - javacpp.jar
   - javacv.jar
   - opencv.jar
-  - opencv- *platform*.jar (used to specify the natives)
+  - opencv-*platform*.jar (used to specify the natives)
 - RxTx library: 
   - rxtx-2.1.7.jar
   - rxtx-native-*platform*.jar(used to specify the natives)
