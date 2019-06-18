@@ -22,7 +22,7 @@ public class Serial implements SerialPortEventListener {
 
 	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac OS X
 			"/dev/ttyUSB0", // Linux
-			"COM5", // Windows
+			"COM3", // Windows
 	};
 
 	private BufferedReader input;

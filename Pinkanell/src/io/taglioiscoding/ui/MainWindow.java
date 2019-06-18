@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import io.ghostyjade.pinkanell.PinkanellMain;
+
 /**
  * 
  * @author taglioIsCoding
@@ -21,7 +23,7 @@ import javax.swing.border.LineBorder;
 public class MainWindow {
 
 	private JFrame frame;
-	private JPanel panel;
+	private JPanel hotmapPanel, cameraPanel;
 	private JLabel lblVmax;
 	private JLabel valueVmed;
 	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor, goal;
@@ -47,15 +49,13 @@ public class MainWindow {
 		frame.setUndecorated(true);
 		frame.getContentPane().setBackground(new Color(238, 238, 238));
 		frame.setBackground(Color.WHITE);
-		frame.setBounds(0, 0, (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth(),
-				(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+		frame.setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width,
+				Toolkit.getDefaultToolkit().getScreenSize().height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		panel = new JPanel();
-		panel.setBorder(new LineBorder(Color.ORANGE, 3));
-		panel.setBounds(6, 30, 826, 592);
-
-		changeToGoal();
+		frame.addKeyListener(closeWindow());
+		hotmapPanel = new JPanel();
+		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
+		hotmapPanel.setBounds(6, 30, 826, 592);
 
 		lblVmax = new JLabel("Velocità massima:");
 		lblVmax.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
@@ -92,7 +92,7 @@ public class MainWindow {
 		points2.setFont(new Font("Lucida Grande", Font.PLAIN, 99));
 
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(panel);
+		frame.getContentPane().add(hotmapPanel);
 		frame.getContentPane().add(lblVmax);
 		frame.getContentPane().add(valueVmed);
 		frame.getContentPane().add(lblVmed);
@@ -107,8 +107,6 @@ public class MainWindow {
 		scoreDivisor.setFont(new Font("Lucida Grande", Font.BOLD, 99));
 		scoreDivisor.setBounds(657, 702, 73, 96);
 		frame.getContentPane().add(scoreDivisor);
-
-		frame.addKeyListener(closeWindow());
 	}
 
 	/**
@@ -131,13 +129,33 @@ public class MainWindow {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 					System.exit(0);
+				if (e.getKeyCode() == KeyEvent.VK_P)
+					changeToCameraPreview();
+				if (e.getKeyCode() == KeyEvent.VK_M)
+					changeToMatchPreview();
 			}
 		};
 	}
 
+	public void changeToMatchPreview() {
+		lblVmax.setBounds(844, 93, 358, 72);
+		lblVmed.setBounds(844, 206, 358, 62);
+		valueVmax.setBounds(1228, 93, 185, 72);
+		valueVmed.setBounds(1228, 189, 193, 96);
+		Player1.setBounds(431, 652, 236, 41);
+		Player2.setBounds(759, 641, 241, 62);
+		points1.setBounds(460, 652, 104, 197);
+		points2.setBounds(731, 630, 206, 236);
+		scoreDivisor.setBounds(657, 702, 73, 96);
+		hotmapPanel.setBounds(6, 30, 826, 592);
+		if (cameraPanel != null)
+			frame.getContentPane().remove(cameraPanel);
+		PinkanellMain.getRecognizerInstance().destroyPanel();
+	}
+
 	public void changeToCameraPreview() {
-		panel.setBorder(new LineBorder(Color.ORANGE, 3));
-		panel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
+		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
+		hotmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 
 		lblVmax.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		lblVmax.setBounds(61, 654, 358, 72);
@@ -169,14 +187,17 @@ public class MainWindow {
 		scoreDivisor.setFont(new Font("Lucida Grande", Font.BOLD, 99));
 		scoreDivisor.setBounds(1023, 730, 73, 96);
 
-		JPanel cameraPanel = new JPanel();
+		PinkanellMain.getRecognizerInstance().createPanel();
+		cameraPanel = new JPanel();
 		cameraPanel.setBorder(new LineBorder(new Color(0, 255, 0), 3));
-		cameraPanel.setBounds(panel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
+		cameraPanel.setBounds(hotmapPanel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10),
+				640);
+		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
 		frame.getContentPane().add(cameraPanel);
 	}
 
 	public void changeToGoal() {
-		panel.setBorder(new LineBorder(Color.RED, 3));
+		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
 
 		goal = new JLabel("GOOOOOOOAL");
 		goal.setBounds(0, 0, (Toolkit.getDefaultToolkit().getScreenSize().width),

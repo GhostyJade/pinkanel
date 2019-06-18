@@ -7,8 +7,8 @@ import io.taglioiscoding.ui.MainWindow;
 
 public class PinkanellMain {
 
-	private MainWindow window;
-	private BallRecognizer recognizer;
+	private static MainWindow window;
+	private static BallRecognizer recognizer;
 
 	public PinkanellMain() {
 		window = new MainWindow();
@@ -34,9 +34,12 @@ public class PinkanellMain {
 		});
 	}
 
+	public static BallRecognizer getRecognizerInstance() {
+		return recognizer;
+	}
+
 	public static void main(String[] args) {
 		new PinkanellMain();
 	}
 
-	// Add EventQueue.invokeLater() to create multithreaded ;
 }

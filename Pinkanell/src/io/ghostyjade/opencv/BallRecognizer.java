@@ -7,6 +7,8 @@ import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
+import java.awt.Container;
+
 import javax.swing.WindowConstants;
 
 import org.bytedeco.javacv.CanvasFrame;
@@ -71,10 +73,11 @@ public class BallRecognizer extends Thread {
 			float c[] = new float[circles.get(i).sizeof()];
 			circles.get(i).get(c);
 			Point center = new Point(Math.round(c[0]), Math.round(c[1]));
-			circle(currentFrame, center, 1, new Scalar(255, 0, 0, 0), 1, 8, 0); //TODO remove and move to render()
+			circle(currentFrame, center, 1, new Scalar(255, 0, 0, 0), 1, 8, 0); // TODO remove and move to render()
 			int radius = Math.round(c[2]);
 			// ABGR color space
-			circle(currentFrame, center, radius, new Scalar(255, 0, 138, 255), 2, 8, 0); //TODO remove and move to render()
+			circle(currentFrame, center, radius, new Scalar(255, 0, 138, 255), 2, 8, 0); // TODO remove and move to
+																							// render()
 		}
 	}
 
@@ -96,6 +99,11 @@ public class BallRecognizer extends Thread {
 		rendering = true;
 	}
 
+	public void destroyPanel() {
+		frame = null;
+		rendering = false;
+	}
+
 	@Override
 	public void run() {
 		while (grabber.grab()) {
@@ -108,5 +116,9 @@ public class BallRecognizer extends Thread {
 
 	public void render() {
 		frame.showImage(converter.convert(currentFrame));
+	}
+
+	public Container getCameraPane() {
+		return frame.getContentPane();
 	}
 }
