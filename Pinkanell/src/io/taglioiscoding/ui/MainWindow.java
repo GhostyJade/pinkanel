@@ -22,7 +22,7 @@ public class MainWindow {
 	private JPanel panel;
 	private JLabel lblVmax;
 	private JLabel valueVmed;
-	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor;
+	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor, goal;
 	
 	
 
@@ -54,6 +54,8 @@ public class MainWindow {
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(Color.ORANGE, 3));
 		panel.setBounds(6, 30, 826, 592);
+
+		changeToGoal();
 
 		lblVmax = new JLabel("Velocità massima:");
 		lblVmax.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
@@ -99,6 +101,9 @@ public class MainWindow {
 		frame.getContentPane().add(Player2);
 		frame.getContentPane().add(points1);
 		frame.getContentPane().add(points2);
+		
+		
+		
 
 		scoreDivisor = new JLabel(":");
 		scoreDivisor.setHorizontalAlignment(SwingConstants.CENTER);
@@ -148,6 +153,24 @@ public class MainWindow {
 				 640);
 		frame.getContentPane().add(cameraPanel);
 	}
+	
+	
+	public void changeToGoal() {
+		panel.setBorder(new LineBorder(Color.RED, 3));
+		//panel.setBounds(0, 0,(Toolkit.getDefaultToolkit().getScreenSize().width),
+		//		Toolkit.getDefaultToolkit().getScreenSize().height);
+		
+		goal = new JLabel("GOOOOOOOAL");
+		goal.setBounds(0,0,(Toolkit.getDefaultToolkit().getScreenSize().width),
+			Toolkit.getDefaultToolkit().getScreenSize().height);
+		goal.setVerticalAlignment(SwingConstants.CENTER);
+		goal.setHorizontalAlignment(SwingConstants.CENTER);
+		goal.setFont(new Font("Lucida Grande", Font.PLAIN, 150));
+		goal.setBorder(new LineBorder(Color.RED, 3));	
+		frame.getContentPane().add(goal);
+	}
+	
+	
 	
 	/**
 	 * Show the window.
