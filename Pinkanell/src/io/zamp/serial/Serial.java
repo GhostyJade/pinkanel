@@ -105,4 +105,12 @@ public class Serial implements SerialPortEventListener {
 			System.out.println("Giocatore 2 " + point2);
 		}
 	}
+
+	public int getPlayerOnePoints() {
+		return point1;
+	}
+
+	public int getPlayerTwoPoints() {
+		return point2;
+	}
 }
