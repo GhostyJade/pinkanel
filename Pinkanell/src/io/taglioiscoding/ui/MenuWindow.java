@@ -15,6 +15,7 @@ import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.Settings;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class MenuWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -27,6 +28,8 @@ public class MenuWindow extends JFrame {
 	private JComboBox<String> comboHeigt; // TODO change to JTextArea
 	private JComboBox<String> comboLang;
 	private JButton btnSave;
+	private JTextField textFieldHeigth;
+	private JTextField textFieldWidth;
 
 	/**
 	 * Launch the application.
@@ -44,7 +47,7 @@ public class MenuWindow extends JFrame {
 		contentPane.setLayout(null);
 
 		lblInsertTheField = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.insertWidth"));
-		lblInsertTheField.setBounds(31, 135, 135, 16);
+		lblInsertTheField.setBounds(6, 135, 175, 16);
 		contentPane.add(lblInsertTheField);
 
 		lblCm = new JLabel("Cm");
@@ -52,7 +55,7 @@ public class MenuWindow extends JFrame {
 		contentPane.add(lblCm);
 
 		lblInsertTheField_1 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.insertHeight"));
-		lblInsertTheField_1.setBounds(34, 169, 132, 16);
+		lblInsertTheField_1.setBounds(6, 169, 175, 16);
 		contentPane.add(lblInsertTheField_1);
 
 		lblCm_1 = new JLabel("Cm");
@@ -94,6 +97,16 @@ public class MenuWindow extends JFrame {
 			}
 		});
 		contentPane.add(btnSave);
+		
+		textFieldHeigth = new JTextField();
+		textFieldHeigth.setBounds(193, 130, 98, 26);
+		contentPane.add(textFieldHeigth);
+		textFieldHeigth.setColumns(10);
+		
+		textFieldWidth = new JTextField();
+		textFieldWidth.setBounds(193, 163, 98, 26);
+		contentPane.add(textFieldWidth);
+		textFieldWidth.setColumns(10);
 	}
 
 	private void setNewLocale() {
