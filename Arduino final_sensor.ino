@@ -25,6 +25,9 @@ void checkOne();
 void checkTwo();
 void addPoint(String g);
 
+/**
+ * This function is used to set up variables with an initial value, in this case we also initialize two objects
+ */
 void setup() {
   Serial.begin(9600);
   point1 = 0;
@@ -33,14 +36,18 @@ void setup() {
   initialDistance2 = sensor2.distanceInMillimeters();
 }
 
+/**
+ * This function is used to call all the function of our arduino project and is continuously repeated
+ */
 void loop() {
-  
   checkOne();
   checkTwo();
   reset();
-  
 }
 
+/**
+ * This function checks if the ball crossed the path of the first HCSR04 ultrasonic sensor and calls the function addPoint() as a result
+ */
 void checkOne(){
     distance1 = sensor1.distanceInMillimeters();
     if (distance1 < (initialDistance1 - ballDiameter)) {
@@ -52,6 +59,9 @@ void checkOne(){
   }
 }
 
+/**
+ * This function checks if the ball crossed the path of the second HCSR04 ultrasonic sensor and calls the function addPoint() as a result
+ */
 void checkTwo(){
     distance2 = sensor2.distanceInMillimeters();
     if (distance2 < (initialDistance2 - ballDiameter)) {
@@ -63,13 +73,20 @@ void checkTwo(){
   }
 }
 
+/**
+ * This function resets the score by putting both point variables to zero after one of the two reached 10
+ */
 void reset(){
-  if(point1 >= 10 || point2 >= 10){
+  if(point1 > 10 || point2 > 10){
     point1 = 0;
     point2 = 0;
-    delay(2000);
+    delay(5000);
   }
 }
+
+/**
+ * This function increases the values by one of the point<?> depending on the content of the string g which needs to be passed as a parameter 
+ */
 void addPoint(String g){
     g.equals(g1) ? point1++ : point2++;
 }
