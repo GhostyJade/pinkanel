@@ -1,9 +1,9 @@
 package io.ghostyjade.opencv;
 
 import static org.bytedeco.opencv.global.opencv_imgproc.COLOR_BGR2GRAY;
-import static org.bytedeco.opencv.global.opencv_imgproc.HOUGH_GRADIENT;
-import static org.bytedeco.opencv.global.opencv_imgproc.CV_RETR_EXTERNAL;
 import static org.bytedeco.opencv.global.opencv_imgproc.CV_CHAIN_APPROX_NONE;
+import static org.bytedeco.opencv.global.opencv_imgproc.CV_RETR_EXTERNAL;
+import static org.bytedeco.opencv.global.opencv_imgproc.HOUGH_GRADIENT;
 import static org.bytedeco.opencv.global.opencv_imgproc.HoughCircles;
 import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
@@ -11,6 +11,8 @@ import static org.bytedeco.opencv.global.opencv_imgproc.findContours;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
 import java.awt.Container;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.WindowConstants;
 
@@ -23,6 +25,8 @@ import org.bytedeco.opencv.opencv_core.Point;
 import org.bytedeco.opencv.opencv_core.Scalar;
 import org.bytedeco.opencv.opencv_imgproc.Vec3fVector;
 import org.bytedeco.opencv.opencv_videoio.VideoCapture;
+
+import io.ghostyjade.pinkanell.PinkanellMain;
 
 /**
  * This class provides methods to recognize a ball from a Webcam stream.
@@ -59,14 +63,18 @@ public class BallRecognizer extends Thread {
 
 	private Vec3fVector circles;
 
+	private List<Point> points = new CopyOnWriteArrayList<>();
+	
 	/**
 	 * 
 	 */
 	public void recognizeBall() {
+		points.clear();
 		Mat gray = new Mat();
 		cvtColor(currentFrame, gray, COLOR_BGR2GRAY);
 		medianBlur(gray, gray, 5);
 		circles = new Vec3fVector();
+		//TODO move values to Constants class
 		HoughCircles(gray, circles, HOUGH_GRADIENT, 1.0, (double) gray.rows() / 16, // change this value
 				// to detect circles
 				// with different
@@ -78,12 +86,7 @@ public class BallRecognizer extends Thread {
 		for (int i = 0; i < circles.get().length; i++) {
 			float c[] = new float[circles.get(i).sizeof()];
 			circles.get(i).get(c);
-			Point center = new Point(Math.round(c[0]), Math.round(c[1]));
-			circle(currentFrame, center, 1, new Scalar(255, 0, 0, 0), 1, 8, 0); // TODO remove and move to render()
-			int radius = Math.round(c[2]);
-			// ABGR color space
-			circle(currentFrame, center, radius, new Scalar(255, 0, 138, 255), 2, 8, 0); // TODO remove and move to
-																							// render()
+			PinkanellMain.getMath().addPoint(new Point(Math.round(c[0]), Math.round(c[1])));
 		}
 	}
 

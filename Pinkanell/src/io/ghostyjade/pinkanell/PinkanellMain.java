@@ -8,6 +8,7 @@ import io.ghostyjade.utils.I18n;
 import io.ghostyjade.utils.Settings;
 import io.ghostyjade.utils.listener.GoalListener;
 import io.taglioiscoding.ui.MainWindow;
+import io.zaffino.math.MathUtil;
 import io.zamp.serial.Serial;
 
 /**
@@ -34,6 +35,8 @@ public class PinkanellMain {
 	 */
 	private static I18n i18n;
 
+	private static MathUtil math;
+
 	/**
 	 * The constructor, initialize all the components.
 	 */
@@ -42,16 +45,19 @@ public class PinkanellMain {
 		Settings.initConstants();
 		i18n = new I18n(Constants.LOCALE_NAME);
 		window = new MainWindow();
+		math = new MathUtil();
 		recognizer = new BallRecognizer();
 		recognizer.init();
 		serial = new Serial(new GoalListener() {
-			
+
 			@Override
 			public void actionPerform() {
+				math.performCalculation();
+				math.resetPoint();
 				window.updateScore();
 			}
 		});
-		
+
 		createThreads();
 	}
 
@@ -103,9 +109,13 @@ public class PinkanellMain {
 	public static MainWindow getWindow() {
 		return window;
 	}
-	
+
 	public static Serial getSerial() {
 		return serial;
+	}
+
+	public static MathUtil getMath() {
+		return math;
 	}
 
 	/**

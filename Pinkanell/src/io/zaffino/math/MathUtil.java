@@ -87,7 +87,7 @@ public class MathUtil {
 	/**
 	 * Get the max speed from
 	 */
-	private void calculateMaxValue() {
+	private void calculateMaxSpeed() {
 		maxSpeed = Collections.max(speedValues);
 	}
 
@@ -117,12 +117,17 @@ public class MathUtil {
 	/**
 	 * Calculate the average speed.
 	 */
-	public void calculateAverageSpeed() {
+	private void calculateAverageSpeed() {
 		double sum = 0;
 		for (int i = 0; i < speedValues.size(); i++) {
 			sum = speedValues.get(i);
 		}
 		averageSpeed = sum / speedValues.size();
+	}
+	
+	public void performCalculation() {
+		calculateAverageSpeed();
+		calculateMaxSpeed();
 	}
 
 }
