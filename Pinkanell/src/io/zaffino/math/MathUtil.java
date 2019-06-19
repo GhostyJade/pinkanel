@@ -12,7 +12,7 @@ import org.bytedeco.opencv.opencv_core.Point;
  * 
  * @author GhostyJade
  * @author Zaffino
- * @author TODO
+ * @author taglioIsCoding
  */
 public class MathUtil {
 
@@ -35,11 +35,14 @@ public class MathUtil {
 	 * Get current time on first point added.
 	 */
 	private long timeOnMathStart;
+	
+	
 
 	/**
 	 * Hold the space value between every two points.
 	 */
 	private List<Double> speedValues = new CopyOnWriteArrayList<>();
+	
 
 	/**
 	 * The last ball point
@@ -113,6 +116,21 @@ public class MathUtil {
 	 */
 	public double getMaxSpeed() {
 		return maxSpeed;
+	}
+	
+	
+	/**
+	 * 
+	 * @return the middle speed
+	 */
+	public void middleSpeed()
+	{
+		
+		double sum = 0;
+		for (int i =0; i < speedValues.size(); i++) {
+		  sum = speedValues.get(i);
+		}
+	    averageSpeed = sum / speedValues.size();
 	}
 
 }
