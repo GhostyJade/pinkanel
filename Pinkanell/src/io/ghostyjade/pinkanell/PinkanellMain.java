@@ -6,6 +6,7 @@ import io.ghostyjade.opencv.BallRecognizer;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.I18n;
 import io.ghostyjade.utils.Settings;
+import io.ghostyjade.utils.listener.GoalListener;
 import io.taglioiscoding.ui.MainWindow;
 import io.zamp.serial.Serial;
 
@@ -43,7 +44,13 @@ public class PinkanellMain {
 		window = new MainWindow();
 		recognizer = new BallRecognizer();
 		recognizer.init();
-		serial = new Serial();
+		serial = new Serial(new GoalListener() {
+			
+			@Override
+			public void actionPerform() {
+				window.updateScore();
+			}
+		});
 		
 		createThreads();
 	}
@@ -95,6 +102,10 @@ public class PinkanellMain {
 	 */
 	public static MainWindow getWindow() {
 		return window;
+	}
+	
+	public static Serial getSerial() {
+		return serial;
 	}
 
 	/**

@@ -26,7 +26,7 @@ public class MathUtil {
 	/**
 	 * The average speed
 	 */
-	private double averageSpeed; // TODO this need to been set
+	private double averageSpeed;
 
 	/**
 	 * The max speed
@@ -37,21 +37,17 @@ public class MathUtil {
 	 * Get current time on first point added.
 	 */
 	private long timeOnMathStart;
-	
-	
 
 	/**
 	 * Hold the space value between every two points.
 	 */
 	private List<Double> speedValues = new CopyOnWriteArrayList<>();
-	
 
 	/**
 	 * The last ball point
 	 */
 	private Point lastPoint;
 
-	// XXX add time calculation and calculate average
 
 	/**
 	 * Add a new point to the point list and calculate the speed at that moment
@@ -91,8 +87,6 @@ public class MathUtil {
 	/**
 	 * Get the max speed from
 	 */
-	// TODO this is completed
-	@SuppressWarnings("unused")
 	private void calculateMaxValue() {
 		maxSpeed = Collections.max(speedValues);
 	}
@@ -119,22 +113,16 @@ public class MathUtil {
 	public double getMaxSpeed() {
 		return maxSpeed;
 	}
-	
-	
+
 	/**
-	 * 
-	 * @return the middle speed
+	 * Calculate the average speed.
 	 */
-	public void middleSpeed()
-	{
-		
+	public void calculateAverageSpeed() {
 		double sum = 0;
-		for (int i =0; i < speedValues.size(); i++) {
-		  sum = speedValues.get(i);
+		for (int i = 0; i < speedValues.size(); i++) {
+			sum = speedValues.get(i);
 		}
-	    averageSpeed = sum / speedValues.size();
+		averageSpeed = sum / speedValues.size();
 	}
-	
-	
 
 }

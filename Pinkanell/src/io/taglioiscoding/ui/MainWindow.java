@@ -202,7 +202,6 @@ public class MainWindow {
 	 */
 	public void changeToGoal() {
 		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
-
 		goal = new JLabel("GOOOOOOOAL");
 		goal.setBounds(0, 0, (Toolkit.getDefaultToolkit().getScreenSize().width),
 				Toolkit.getDefaultToolkit().getScreenSize().height);
@@ -233,5 +232,11 @@ public class MainWindow {
 		player1.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
 		player2.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
 
+	}
+
+	public void updateScore() {
+		points1.setText(String.valueOf(PinkanellMain.getSerial().getTeamOneScore()));		
+		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
+		//TODO set velocity
 	}
 }
