@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class MenuWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -21,10 +22,10 @@ public class MenuWindow extends JFrame {
 	private JLabel lblCm;
 	private JLabel lblInsertTheField_1, lblInsertTheField;
 	private JLabel lblCm_1;
-	private JComboBox<String> comboWidth;
-	private JComboBox<String> comboHeigt;
 	private JComboBox<String> comboLang;
 	private JButton btnSave;
+	private JTextField textFieldHeigth;
+	private JTextField textFieldWidth;
 
 	/**
 	 * Launch the application.
@@ -42,7 +43,7 @@ public class MenuWindow extends JFrame {
 		contentPane.setLayout(null);
 
 		lblInsertTheField = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.insertWidth"));
-		lblInsertTheField.setBounds(31, 135, 135, 16);
+		lblInsertTheField.setBounds(6, 135, 175, 16);
 		contentPane.add(lblInsertTheField);
 
 		lblCm = new JLabel("Cm");
@@ -50,7 +51,7 @@ public class MenuWindow extends JFrame {
 		contentPane.add(lblCm);
 
 		lblInsertTheField_1 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.insertHeight"));
-		lblInsertTheField_1.setBounds(34, 169, 132, 16);
+		lblInsertTheField_1.setBounds(6, 169, 175, 16);
 		contentPane.add(lblInsertTheField_1);
 
 		lblCm_1 = new JLabel("Cm");
@@ -61,16 +62,6 @@ public class MenuWindow extends JFrame {
 		comboLang.setModel(new DefaultComboBoxModel<String>(new String[] { "Italiano", "English" }));
 		comboLang.setBounds(141, 46, 123, 27);
 		contentPane.add(comboLang);
-
-		comboWidth = new JComboBox<String>();
-		comboWidth.setModel(new DefaultComboBoxModel<String>(new String[] { "10", "20", "30" }));
-		comboWidth.setBounds(168, 131, 123, 27);
-		contentPane.add(comboWidth);
-
-		comboHeigt = new JComboBox<String>();
-		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "10 ", "20", "30" }));
-		comboHeigt.setBounds(168, 165, 123, 27);
-		contentPane.add(comboHeigt);
 
 		btnSave = new JButton(PinkanellMain.getI18n().getTranslationString("ui.btnsave"));
 		btnSave.setBounds(315, 225, 117, 29);
@@ -85,6 +76,16 @@ public class MenuWindow extends JFrame {
 			}
 		});
 		contentPane.add(btnSave);
+		
+		textFieldHeigth = new JTextField();
+		textFieldHeigth.setBounds(193, 130, 98, 26);
+		contentPane.add(textFieldHeigth);
+		textFieldHeigth.setColumns(10);
+		
+		textFieldWidth = new JTextField();
+		textFieldWidth.setBounds(193, 163, 98, 26);
+		contentPane.add(textFieldWidth);
+		textFieldWidth.setColumns(10);
 	}
 
 	private void setNewLocale() {

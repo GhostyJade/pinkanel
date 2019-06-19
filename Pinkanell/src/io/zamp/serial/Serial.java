@@ -27,7 +27,9 @@ public class Serial implements SerialPortEventListener {
 	 */
 	private int point2;
 
-	private static final String PORT_NAMES[] = { "/dev/tty.usbmodem14201", // Mac OS X
+	private static final String PORT_NAMES[] = { 
+			//"/dev/tty.usbmodem14201", // Mac OS X
+			"/dev/tty.usbmodemFD121",
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
