@@ -1,3 +1,5 @@
 # Arduino Project
-This folder contains all the Arduino tests that we want to use for our project.
-The sketch_jun11a is only a test file, it's **WRONG**.
+This folder contains the sketch of arduino that our gruop 
+utilized to track the number of goals scored during a game
+of foosball.
+This **may** be the final sketch
