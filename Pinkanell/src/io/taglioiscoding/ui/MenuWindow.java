@@ -11,7 +11,8 @@ import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 
 public class MenuWindow extends JFrame {
-
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JLabel lblCm;
 	private JLabel lblInsertTheField_1;
@@ -51,18 +52,18 @@ public class MenuWindow extends JFrame {
 		lblCm_1.setBounds(303, 169, 61, 16);
 		contentPane.add(lblCm_1);
 
-		comboLen = new JComboBox();
-		comboLen.setModel(new DefaultComboBoxModel(new String[] { "Italiano", "English" }));
+		comboLen = new JComboBox<String>();
+		comboLen.setModel(new DefaultComboBoxModel<String>(new String[] { "Italiano", "English" }));
 		comboLen.setBounds(141, 46, 123, 27);
 		contentPane.add(comboLen);
 
-		comboWidth = new JComboBox();
-		comboWidth.setModel(new DefaultComboBoxModel(new String[] { "10", "20", "30" }));
+		comboWidth = new JComboBox<String>();
+		comboWidth.setModel(new DefaultComboBoxModel<String>(new String[] { "10", "20", "30" }));
 		comboWidth.setBounds(168, 131, 123, 27);
 		contentPane.add(comboWidth);
 
-		comboHeigt = new JComboBox();
-		comboHeigt.setModel(new DefaultComboBoxModel(new String[] { "10", "20", "30" }));
+		comboHeigt = new JComboBox<String>();
+		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "10", "20", "30" }));
 		comboHeigt.setBounds(168, 165, 123, 27);
 		contentPane.add(comboHeigt);
 	}
