@@ -96,12 +96,13 @@ public class BallRecognizer extends Thread {
 	public void createPanel() {
 		frame = new CanvasFrame("Pallettah-Recognition", 1);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setVisible(false);
 		rendering = true;
 	}
 
 	public void destroyPanel() {
-		frame = null;
 		rendering = false;
+		frame = null;
 	}
 
 	@Override

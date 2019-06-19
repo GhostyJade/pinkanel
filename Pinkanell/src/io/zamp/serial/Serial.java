@@ -11,16 +11,23 @@ import gnu.io.SerialPortEventListener;
 
 /**
  *
- * @author Stage 2018/2019
+ * @author Zamp
  * @since v1.0
  */
 public class Serial implements SerialPortEventListener {
 
 	private SerialPort serialPort;
 
-	private int point1, point2;
+	/**
+	 * 
+	 */
+	private int point1;
+	/**
+	 * 
+	 */
+	private int point2;
 
-	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac OS X
+	private static final String PORT_NAMES[] = { "/dev/tty.usbmodem14201", // Mac OS X
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -49,16 +56,14 @@ public class Serial implements SerialPortEventListener {
 
 		try {
 			serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
-
 			serialPort.setSerialPortParams(BAUD_RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1,
 					SerialPort.PARITY_NONE);
 
-			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
-
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
+			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 		} catch (Exception e) {
-			System.err.println(e.toString());
+			System.err.println("Couldn't initialize the COM port: resource is busy.");
 		}
 	}
 
@@ -72,6 +77,9 @@ public class Serial implements SerialPortEventListener {
 		}
 	}
 
+	/**
+	 * Close the serial communication
+	 */
 	public synchronized void close() {
 		if (serialPort != null) {
 			serialPort.removeEventListener();
@@ -79,38 +87,34 @@ public class Serial implements SerialPortEventListener {
 		}
 	}
 
+	public Serial() {
+		this("0");
+	}
+
 	public Serial(String ncom) {
 		if (Integer.parseInt(ncom) >= 3 && Integer.parseInt(ncom) <= 9)
 			PORT_NAMES[2] = "COM" + ncom;
-		initialize();
-		Thread t = new Thread() {
-			public void run() {
-				try {
-					Thread.sleep(1000000);
-				} catch (InterruptedException ie) {
-				}
-			}
-		};
-		t.start();
 		System.out.println("Serial Comms Started");
 	}
 
 	private void assignPoint(String s) {
-
-		if (s.startsWith("1")) {
+		System.out.println(s);
+		if (s.startsWith("1"))
 			point1 = Integer.parseInt(s.substring(1, s.length()));
-			System.out.println("Giocatore 1 " + point1);
-		} else {
+		else
 			point2 = Integer.parseInt(s.substring(1, s.length()));
-			System.out.println("Giocatore 2 " + point2);
-		}
 	}
 
-	public int getPlayerOnePoints() {
+	public int getTeamOneScore() {
 		return point1;
 	}
 
-	public int getPlayerTwoPoints() {
+	public int getTeamTwoScore() {
 		return point2;
 	}
+
+	public BufferedReader getInput() {
+		return input;
+	}
+
 }

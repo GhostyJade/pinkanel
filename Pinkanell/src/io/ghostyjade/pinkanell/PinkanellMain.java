@@ -6,6 +6,7 @@ import io.ghostyjade.opencv.BallRecognizer;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.I18n;
 import io.taglioiscoding.ui.MainWindow;
+import io.zamp.serial.Serial;
 
 /**
  * This is the main class of our program.
@@ -24,6 +25,8 @@ public class PinkanellMain {
 	 */
 	private static BallRecognizer recognizer;
 
+	private static Serial serial;
+
 	/**
 	 * The i18n class instance
 	 */
@@ -36,6 +39,7 @@ public class PinkanellMain {
 		i18n = new I18n(Constants.LOCALE_NAME);
 		window = new MainWindow();
 		recognizer = new BallRecognizer();
+		serial = new Serial();
 		createThreads();
 	}
 
@@ -58,6 +62,7 @@ public class PinkanellMain {
 				recognizer.start();
 			}
 		});
+		serial.initialize();
 	}
 
 	/**
@@ -79,6 +84,13 @@ public class PinkanellMain {
 	 */
 	public static I18n getI18n() {
 		return i18n;
+	}
+
+	/**
+	 * Destroy the program. It closes serial communication and the camera.
+	 */
+	public static void destroy() {
+		
 	}
 
 }
