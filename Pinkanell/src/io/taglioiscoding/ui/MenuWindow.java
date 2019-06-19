@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
+import io.ghostyjade.utils.Settings;
+
 import javax.swing.JButton;
 
 public class MenuWindow extends JFrame {
@@ -21,8 +23,8 @@ public class MenuWindow extends JFrame {
 	private JLabel lblCm;
 	private JLabel lblInsertTheField_1, lblInsertTheField;
 	private JLabel lblCm_1;
-	private JComboBox<String> comboWidth;
-	private JComboBox<String> comboHeigt;
+	private JComboBox<String> comboWidth; // TODO change to JTextArea
+	private JComboBox<String> comboHeigt; // TODO change to JTextArea
 	private JComboBox<String> comboLang;
 	private JButton btnSave;
 
@@ -68,7 +70,7 @@ public class MenuWindow extends JFrame {
 		contentPane.add(comboWidth);
 
 		comboHeigt = new JComboBox<String>();
-		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "10 ", "20", "30" }));
+		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "10", "20", "30" }));
 		comboHeigt.setBounds(168, 165, 123, 27);
 		contentPane.add(comboHeigt);
 
@@ -79,6 +81,13 @@ public class MenuWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setNewLocale();
+				try {
+					Settings.updateSettings(Constants.LOCALE_NAME,
+							Integer.valueOf(comboWidth.getItemAt(comboWidth.getSelectedIndex())),
+							Integer.valueOf(comboHeigt.getItemAt(comboHeigt.getSelectedIndex())));
+				} catch (Exception ex) {
+					ex.printStackTrace(); // This exception will be a NumberFormatException()
+				}
 				PinkanellMain.getI18n().loadLocale(Constants.LOCALE_NAME);
 				reloadTexts();
 				PinkanellMain.getWindow().reloadTexts();
@@ -98,12 +107,12 @@ public class MenuWindow extends JFrame {
 			break;
 		}
 	}
-	
+
 	public void reloadTexts() {
 		lblInsertTheField.setText(PinkanellMain.getI18n().getTranslationString("ui.insertWidth"));
 		lblInsertTheField_1.setText(PinkanellMain.getI18n().getTranslationString("ui.insertHeight"));
 		btnSave.setText(PinkanellMain.getI18n().getTranslationString("ui.btnsave"));
-		
+
 	}
 
 	public void showWindow() {

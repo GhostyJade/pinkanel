@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import io.ghostyjade.opencv.BallRecognizer;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.I18n;
+import io.ghostyjade.utils.Settings;
 import io.taglioiscoding.ui.MainWindow;
 import io.zamp.serial.Serial;
 
@@ -36,6 +37,8 @@ public class PinkanellMain {
 	 * The constructor, initialize all the components.
 	 */
 	public PinkanellMain() {
+		Settings.loadSettingsFromFile("pinkanell.properties");
+		Settings.initConstants();
 		i18n = new I18n(Constants.LOCALE_NAME);
 		window = new MainWindow();
 		recognizer = new BallRecognizer();

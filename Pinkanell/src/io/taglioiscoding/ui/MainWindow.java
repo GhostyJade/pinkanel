@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import io.ghostyjade.pinkanell.PinkanellMain;
+import io.ghostyjade.utils.Settings;
 
 /**
  * 
@@ -130,8 +131,10 @@ public class MainWindow {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					Settings.storeSettingsToFile("pinkanell.properties");
 					System.exit(0);
+				}
 				if (e.getKeyCode() == KeyEvent.VK_P)
 					changeToCameraPreview();
 				if (e.getKeyCode() == KeyEvent.VK_M)
