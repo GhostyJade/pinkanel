@@ -20,7 +20,8 @@ public class Serial implements SerialPortEventListener {
 
 	private int point1, point2;
 
-	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1", // Mac OS X
+	private static final String PORT_NAMES[] = { 
+			"/dev/tty.usbserial-A9007UX1", // Mac OS X
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -100,6 +101,7 @@ public class Serial implements SerialPortEventListener {
 		if (s.startsWith("1")) {
 			point1 = Integer.parseInt(s.substring(1, s.length()));
 			System.out.println("Giocatore 1 " + point1);
+			
 		} else {
 			point2 = Integer.parseInt(s.substring(1, s.length()));
 			System.out.println("Giocatore 2 " + point2);
