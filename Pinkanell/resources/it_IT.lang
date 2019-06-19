@@ -2,3 +2,5 @@ ui.maxspeed=Velocità massima:
 ui.averagespeed=Velocità media:
 ui.player1=Giocatore 1
 ui.player2=Giocatore 2
+ui.insertHeight=inserisci l'altezza del campo:
+ui.insertWidth=inserisci la larghezza del campo:

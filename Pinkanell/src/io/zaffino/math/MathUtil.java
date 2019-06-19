@@ -6,6 +6,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bytedeco.opencv.opencv_core.Point;
 
+import io.ghostyjade.utils.Constants;
+
 /**
  * This class is a thread that calculate the average value and the max value of
  * a match.
@@ -62,7 +64,7 @@ public class MathUtil {
 			lastPoint = p;
 			return;
 		}
-		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint))); // FIXME ground size!
+		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD)); // FIXME ground size!
 		lastPoint = p;
 	}
 
@@ -132,5 +134,7 @@ public class MathUtil {
 		}
 	    averageSpeed = sum / speedValues.size();
 	}
+	
+	
 
 }

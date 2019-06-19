@@ -141,6 +141,8 @@ public class MainWindow {
 					changeToCameraPreview();
 				if (e.getKeyCode() == KeyEvent.VK_M)
 					changeToMatchPreview();
+				if (e.getKeyCode() == KeyEvent.VK_S)
+					new MenuWindow().showWindow();
 			}
 		};
 	}
