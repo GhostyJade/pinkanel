@@ -2,13 +2,15 @@ package io.ghostyjade.opencv;
 
 import static org.bytedeco.opencv.global.opencv_imgproc.COLOR_BGR2GRAY;
 import static org.bytedeco.opencv.global.opencv_imgproc.HOUGH_GRADIENT;
+import static org.bytedeco.opencv.global.opencv_imgproc.CV_RETR_EXTERNAL;
+import static org.bytedeco.opencv.global.opencv_imgproc.CV_CHAIN_APPROX_NONE;
 import static org.bytedeco.opencv.global.opencv_imgproc.HoughCircles;
 import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
+import static org.bytedeco.opencv.global.opencv_imgproc.findContours;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
 import java.awt.Container;
-import java.awt.Dimension;
 
 import javax.swing.WindowConstants;
 
@@ -16,6 +18,7 @@ import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.OpenCVFrameConverter.ToIplImage;
 import org.bytedeco.opencv.global.opencv_imgproc;
 import org.bytedeco.opencv.opencv_core.Mat;
+import org.bytedeco.opencv.opencv_core.MatVector;
 import org.bytedeco.opencv.opencv_core.Point;
 import org.bytedeco.opencv.opencv_core.Scalar;
 import org.bytedeco.opencv.opencv_imgproc.Vec3fVector;
@@ -133,5 +136,14 @@ public class BallRecognizer extends Thread {
 
 	public Container getCameraPane() {
 		return frame.getContentPane();
+	}
+
+	public void recognizeField() {
+		Mat photo = new Mat();
+		grabber.read(photo);
+
+		MatVector points = new MatVector();
+		findContours(photo, points, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+		// points.
 	}
 }
