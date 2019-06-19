@@ -12,14 +12,9 @@ import org.bytedeco.opencv.opencv_core.Point;
  * 
  * @author GhostyJade
  * @author Zaffino
- *
+ * @author TODO
  */
-public class MathUtil extends Thread {
-
-	/**
-	 * Is this thread running?
-	 */
-	private boolean running = false;
+public class MathUtil {
 
 	/**
 	 * List that stores the ball position coordinates
@@ -27,66 +22,56 @@ public class MathUtil extends Thread {
 	private List<Point> ballPositions = new CopyOnWriteArrayList<>();
 
 	/**
-	 * the average speed
+	 * The average speed
 	 */
-	private double averageSpeed;
+	private double averageSpeed; // TODO this need to been set
 
 	/**
-	 * the max speed
+	 * The max speed
 	 */
 	private double maxSpeed;
 
 	/**
-	 * constantly updated attribute, calculate every time
+	 * Get current time on first point added.
 	 */
 	private long timeOnMathStart;
 
 	/**
 	 * Hold the space value between every two points.
 	 */
-	private List<Double> spaceValues = new CopyOnWriteArrayList<>();
-
-	private Point lastPoint;
+	private List<Double> speedValues = new CopyOnWriteArrayList<>();
 
 	/**
-	 * Class constructor.
+	 * The last ball point
 	 */
-	public MathUtil() {
-		setName("MathUtilThread");
-		running = true;
-		// add time calculation and calculate average
-	}
+	private Point lastPoint;
 
+	// XXX add time calculation and calculate average
+
+	/**
+	 * Add a new point to the point list and calculate the speed at that moment
+	 * 
+	 * @param p the new point
+	 */
 	public void addPoint(Point p) {
 		if (lastPoint == null) {
 			timeOnMathStart = System.currentTimeMillis();
 			lastPoint = p;
 			return;
 		}
-		spaceValues.add(calculateSpace(p, lastPoint));
+		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint))); // FIXME ground size!
 		lastPoint = p;
 	}
 
+	/**
+	 * Calculate the space between two points
+	 * 
+	 * @param p0 the first point
+	 * @param p1 the second point
+	 * @return the distance between p0 and p1
+	 */
 	private double calculateSpace(Point p0, Point p1) {
 		return Math.sqrt(Math.pow(p0.x() - p1.x(), 2) + Math.pow(p0.y() - p1.y(), 2));
-	}
-
-	/**
-	 * Calculate the average speed and the max speed
-	 */
-	@Override
-	public void run() {
-		while (running) {
-			// double space = calculateSpace();
-			// double time = calculateTime();
-
-			// if (space != -1) {
-			// speedValues.add(calculateSpeed(time, space));
-			// calculateAverage();
-			// calculateMaxValue();
-			// }
-
-		}
 	}
 
 	/**
@@ -99,51 +84,21 @@ public class MathUtil extends Thread {
 	}
 
 	/**
-	 * calculate the time spent since the last calculation
-	 * 
-	 * @return the difference between the current time and the previous one
-	 */
-	// FIXME
-	private double calculateTime() { // ricontrolla metodo
-		long timeDifference = System.currentTimeMillis();// - time0;
-		return timeDifference;
-	}
-
-	/**
-	 * calculate the space traveled by the ball
-	 * 
-	 * @return the total space traveled by the ball
-	 */
-
-	/**
-	 * calculates the speed
-	 * 
-	 * @param time
-	 * @param space
-	 * @return speed
-	 */
-	private double calculateSpeed(double time, double space) {
-		return (space / time);
-	}
-
-	/**
 	 * Get the max speed from
 	 */
 	// TODO this is completed
+	@SuppressWarnings("unused")
 	private void calculateMaxValue() {
-		maxSpeed = Collections.max(spaceValues);
+		maxSpeed = Collections.max(speedValues);
 	}
 
 	/**
-	 * Calculate the average speed
+	 * Calculate the speed.
+	 * 
+	 * @param space the space between two points
 	 */
-	//TODO idk if this is done
-	private void calculateAverage() {
-		double spaceSum = 0;
-		for (int i = 0; i < spaceValues.size(); i++) {
-			spaceSum += spaceValues.get(i);
-		}
-		averageSpeed = (spaceSum / (System.currentTimeMillis() - timeOnMathStart));
+	private double calculateSpeed(double space) {
+		return (space / (System.currentTimeMillis() - timeOnMathStart));
 	}
 
 	/**
