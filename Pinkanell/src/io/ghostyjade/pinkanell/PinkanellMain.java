@@ -87,10 +87,17 @@ public class PinkanellMain {
 	}
 
 	/**
+	 * @return the {@linkplain MainWindow window} instance.
+	 */
+	public static MainWindow getWindow() {
+		return window;
+	}
+
+	/**
 	 * Destroy the program. It closes serial communication and the camera.
 	 */
 	public static void destroy() {
-		
+
 	}
 
 }

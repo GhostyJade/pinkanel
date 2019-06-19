@@ -17,22 +17,17 @@ import io.ghostyjade.pinkanell.PinkanellMain;
 /**
  * 
  * @author taglioIsCoding
+ * @author GhostyJade
  * @since v1.0
  */
 
 public class MainWindow {
-	
-	/**
-	 * 
-	 * Initialize elements
-	 * 
-	 */
 
 	private JFrame frame;
 	private JPanel hotmapPanel, cameraPanel;
 	private JLabel lblVmax;
 	private JLabel valueVmed;
-	private JLabel lblVmed, valueVmax, Player1, Player2, points1, points2, scoreDivisor, goal;
+	private JLabel lblVmed, valueVmax, player1, player2, points1, points2, scoreDivisor, goal;
 
 	private final Font lucidaGrande40 = new Font("Lucida Grande", Font.PLAIN, 40);
 
@@ -81,13 +76,13 @@ public class MainWindow {
 		valueVmax.setFont(lucidaGrande40);
 		valueVmax.setBounds(1228, 93, 185, 72);
 
-		Player1 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.player1"));
-		Player1.setFont(lucidaGrande40);
-		Player1.setBounds(431, 652, 236, 41);
+		player1 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.player1"));
+		player1.setFont(lucidaGrande40);
+		player1.setBounds(431, 652, 236, 41);
 
-		Player2 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.player2"));
-		Player2.setFont(lucidaGrande40);
-		Player2.setBounds(759, 641, 241, 62);
+		player2 = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.player2"));
+		player2.setFont(lucidaGrande40);
+		player2.setBounds(759, 641, 241, 62);
 
 		points1 = new JLabel("0");
 		points1.setBounds(460, 652, 104, 197);
@@ -105,8 +100,8 @@ public class MainWindow {
 		frame.getContentPane().add(valueVmed);
 		frame.getContentPane().add(lblVmed);
 		frame.getContentPane().add(valueVmax);
-		frame.getContentPane().add(Player1);
-		frame.getContentPane().add(Player2);
+		frame.getContentPane().add(player1);
+		frame.getContentPane().add(player2);
 		frame.getContentPane().add(points1);
 		frame.getContentPane().add(points2);
 
@@ -118,7 +113,7 @@ public class MainWindow {
 	}
 
 	/**
-	 * Close the application
+	 * A {@link KeyListener} that perform some tasks when certain keys has been hit
 	 * 
 	 * @author GhostyJade
 	 */
@@ -146,20 +141,17 @@ public class MainWindow {
 			}
 		};
 	}
-	
-	/**
-	 * 
-	 * Preview of the UI during the match
-	 * 
-	 */
 
+	/**
+	 * Preview of the UI during the match
+	 */
 	public void changeToMatchPreview() {
 		lblVmax.setBounds(844, 93, 358, 72);
 		lblVmed.setBounds(844, 206, 358, 62);
 		valueVmax.setBounds(1228, 93, 185, 72);
 		valueVmed.setBounds(1228, 189, 193, 96);
-		Player1.setBounds(431, 652, 236, 41);
-		Player2.setBounds(759, 641, 241, 62);
+		player1.setBounds(431, 652, 236, 41);
+		player2.setBounds(759, 641, 241, 62);
 		points1.setBounds(460, 652, 104, 197);
 		points2.setBounds(731, 630, 206, 236);
 		scoreDivisor.setBounds(657, 702, 73, 96);
@@ -168,13 +160,10 @@ public class MainWindow {
 			frame.getContentPane().remove(cameraPanel);
 		PinkanellMain.getRecognizerInstance().destroyPanel();
 	}
-	
-	/**
-	 * 
-	 * Preview of camera vision that we used for debugging
-	 * 
-	 */
 
+	/**
+	 * Preview of camera vision that we used for debugging
+	 */
 	public void changeToCameraPreview() {
 		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
 		hotmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
@@ -183,8 +172,8 @@ public class MainWindow {
 		valueVmed.setBounds(445, 750, 193, 96);
 		lblVmed.setBounds(61, 767, 358, 62);
 		valueVmax.setBounds(445, 654, 185, 72);
-		Player1.setBounds(797, 680, 236, 41);
-		Player2.setBounds(1125, 669, 241, 62);
+		player1.setBounds(797, 680, 236, 41);
+		player2.setBounds(1125, 669, 241, 62);
 
 		points1.setBounds(826, 680, 104, 197);
 		points1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -203,13 +192,10 @@ public class MainWindow {
 		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
 		frame.getContentPane().add(cameraPanel);
 	}
-	
-	/**
-	 * 
-	 * First test for the goal animation
-	 * 
-	 */
 
+	/**
+	 * First test for the goal animation
+	 */
 	public void changeToGoal() {
 		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
 
@@ -230,5 +216,18 @@ public class MainWindow {
 	 */
 	public void create() {
 		frame.setVisible(true);
+	}
+
+	/**
+	 * Reload the text strings
+	 * 
+	 * @author GhostyJade
+	 */
+	public void reloadTexts() {
+		lblVmax.setText(PinkanellMain.getI18n().getTranslationString("ui.maxspeed"));
+		lblVmed.setText(PinkanellMain.getI18n().getTranslationString("ui.averagespeed"));
+		player1.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
+		player2.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
+
 	}
 }

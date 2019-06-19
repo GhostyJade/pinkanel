@@ -50,11 +50,12 @@ public class I18n {
 					new InputStreamReader(getClass().getResourceAsStream("/" + localeName + ".lang")));
 			String s;
 			while ((s = reader.readLine()) != null) {
-				if (!s.startsWith("#") || s.startsWith("\n")) {
+				if (!s.startsWith("#") && !s.contentEquals("")) {
 					String[] parts = s.split("=");
 					translations.put(parts[0], parts[1]);
 				}
 			}
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

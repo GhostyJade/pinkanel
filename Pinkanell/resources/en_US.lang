@@ -1,6 +1,10 @@
+# Main window
 ui.maxspeed=Max speed:
 ui.averagespeed=Average speed:
 ui.player1=Player 1
 ui.player2=Player 2
-ui.insertHeight=insert the field height:
-ui.insertWidth=insert the field height:
+
+# Settings window
+ui.insertHeight=Insert the field height:
+ui.insertWidth=Insert the field height:
+ui.btnsave=Save
