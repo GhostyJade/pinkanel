@@ -8,6 +8,7 @@ import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
 import java.awt.Container;
+import java.awt.Dimension;
 
 import javax.swing.WindowConstants;
 
@@ -53,6 +54,8 @@ public class BallRecognizer extends Thread {
 	 */
 	private boolean rendering = false;
 
+	private Vec3fVector circles;
+
 	/**
 	 * 
 	 */
@@ -60,7 +63,7 @@ public class BallRecognizer extends Thread {
 		Mat gray = new Mat();
 		cvtColor(currentFrame, gray, COLOR_BGR2GRAY);
 		medianBlur(gray, gray, 5);
-		Vec3fVector circles = new Vec3fVector();
+		circles = new Vec3fVector();
 		HoughCircles(gray, circles, HOUGH_GRADIENT, 1.0, (double) gray.rows() / 16, // change this value
 				// to detect circles
 				// with different
@@ -116,6 +119,15 @@ public class BallRecognizer extends Thread {
 	}
 
 	public void render() {
+		for (int i = 0; i < circles.get().length; i++) {
+			float c[] = new float[circles.get(i).sizeof()];
+			circles.get(i).get(c);
+			Point center = new Point(Math.round(c[0]), Math.round(c[1]));
+			circle(currentFrame, center, 1, new Scalar(255, 0, 0, 0), 1, 8, 0);
+			int radius = Math.round(c[2]);
+			// ABGR color space
+			circle(currentFrame, center, radius, new Scalar(255, 0, 138, 255), 2, 8, 0);
+		}
 		frame.showImage(converter.convert(currentFrame));
 	}
 

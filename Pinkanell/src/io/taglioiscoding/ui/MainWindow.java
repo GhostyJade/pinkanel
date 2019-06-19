@@ -167,6 +167,7 @@ public class MainWindow {
 	public void changeToCameraPreview() {
 		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
 		hotmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
+		System.out.println(hotmapPanel.getSize());
 
 		lblVmax.setBounds(61, 654, 358, 72);
 		valueVmed.setBounds(445, 750, 193, 96);
@@ -187,9 +188,9 @@ public class MainWindow {
 		PinkanellMain.getRecognizerInstance().createPanel();
 		cameraPanel = new JPanel();
 		cameraPanel.setBorder(new LineBorder(new Color(0, 255, 0), 3));
+		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
 		cameraPanel.setBounds(hotmapPanel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10),
 				640);
-		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
 		frame.getContentPane().add(cameraPanel);
 	}
 
