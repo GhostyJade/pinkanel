@@ -36,7 +36,6 @@ public class BallRecognizer implements Runnable {
 	 */
 	private boolean running = false;
 
-
 	/**
 	 * Vector that contains circles
 	 */
@@ -46,7 +45,7 @@ public class BallRecognizer implements Runnable {
 	 * A list of points.
 	 */
 	private List<Point> points = new CopyOnWriteArrayList<>();
-	
+
 	private boolean rendering = false;
 
 	/**
@@ -76,7 +75,8 @@ public class BallRecognizer implements Runnable {
 	public void run() {
 		while (running) {
 			recognizeBall();
-			if(rendering) render();
+			if (rendering)
+				render();
 		}
 	}
 
@@ -90,6 +90,7 @@ public class BallRecognizer implements Runnable {
 			// ABGR color space
 			circle(cameraInstance.getCurrentFrame(), center, radius, new Scalar(255, 0, 138, 255), 2, 8, 0);
 		}
+		PinkanellMain.getCVManager().render();
 	}
 
 	public BallRecognizer(CameraFramer cameraInstance) {
@@ -100,7 +101,7 @@ public class BallRecognizer implements Runnable {
 	public void destroy() {
 		running = false;
 	}
-	
+
 	public void setRendering(boolean rendering) {
 		this.rendering = rendering;
 	}

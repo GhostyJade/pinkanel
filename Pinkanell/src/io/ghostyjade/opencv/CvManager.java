@@ -78,7 +78,7 @@ public class CvManager {
 	/**
 	 * If the rendering is enabled, render the camera frame to the preview.
 	 */
-	public void render() { //FIXME MOVE.
+	public void render() { // FIXME MOVE.
 		if (renderingEnabled) {
 			frame.showImage(converter.convert(cameraInstance.getCurrentFrame()));
 		}
@@ -111,15 +111,15 @@ public class CvManager {
 		frame.setVisible(false);
 		ballRecognizer.setRendering(true);
 		renderingEnabled = true;
-		PinkanellMain.serviceExecutor.execute(new Runnable() {
-
-			@Override
-			public void run() {
-				while (cameraInstance.isCameraAlive()) {
-					render();
-				}
-			}
-		});
+		// PinkanellMain.serviceExecutor.execute(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				while (cameraInstance.isCameraAlive()) {
+//					render();
+//				}
+//			}
+//		});
 	}
 
 	/**
