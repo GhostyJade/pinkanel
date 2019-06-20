@@ -95,6 +95,7 @@ public class PinkanellMain {
 	 * @param args the program arguments (unused in our application)
 	 */
 	public static void main(String[] args) {
+		System.loadLibrary("rxtxSerial");
 		new PinkanellMain();
 	}
 

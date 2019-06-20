@@ -75,7 +75,7 @@ public class MenuWindow extends JFrame {
 		contentPane.add(comboWidth);
 
 		comboHeigt = new JComboBox<String>();
-		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "10", "20", "30" }));
+		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "100", "110", "120","130", "140" }));
 		comboHeigt.setBounds(168, 165, 123, 27);
 		contentPane.add(comboHeigt);
 
