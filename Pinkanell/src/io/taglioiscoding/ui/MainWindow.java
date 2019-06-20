@@ -24,12 +24,22 @@ import io.ghostyjade.utils.Settings;
 
 public class MainWindow {
 
+	/**
+	 * The frame container
+	 */
 	private JFrame frame;
+	/**
+	 * The panels used to contain the hotmap and the camera preview
+	 */
 	private JPanel hotmapPanel, cameraPanel;
-	private JLabel lblVmax;
-	private JLabel valueVmed;
-	private JLabel lblVmed, valueVmax, player1, player2, points1, points2, scoreDivisor, goal;
+	/**
+	 * Some labels that stores players score and speed values.
+	 */
+	private JLabel lblVmax, valueVmed, lblVmed, valueVmax, player1, player2, points1, points2, scoreDivisor, goal;
 
+	/**
+	 * The font instance, used to display texts
+	 */
 	private final Font lucidaGrande40 = new Font("Lucida Grande", Font.PLAIN, 40);
 
 	/**
@@ -40,11 +50,9 @@ public class MainWindow {
 	}
 
 	/**
-	 * 
 	 * Initialize the contents of the frame.
 	 * 
 	 * @author taglioIsCoding
-	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -114,7 +122,7 @@ public class MainWindow {
 	}
 
 	/**
-	 * A {@link KeyListener} that perform some tasks when certain keys has been hit
+	 * A {@link KeyListener} that perform some tasks when certain keys has been hit.
 	 * 
 	 * @author GhostyJade
 	 */
@@ -133,6 +141,7 @@ public class MainWindow {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					Settings.storeSettingsToFile("pinkanell.properties");
+					PinkanellMain.destroy();
 					System.exit(0);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_P)
@@ -161,7 +170,7 @@ public class MainWindow {
 		hotmapPanel.setBounds(6, 30, 826, 592);
 		if (cameraPanel != null)
 			frame.getContentPane().remove(cameraPanel);
-		PinkanellMain.getRecognizerInstance().destroyPanel();
+		PinkanellMain.getCVManager().destroyPanel();
 	}
 
 	/**
@@ -187,10 +196,10 @@ public class MainWindow {
 		scoreDivisor.setHorizontalAlignment(SwingConstants.CENTER);
 		scoreDivisor.setBounds(1023, 730, 73, 96);
 
-		PinkanellMain.getRecognizerInstance().createPanel();
+		PinkanellMain.getCVManager().createPanel();
 		cameraPanel = new JPanel();
 		cameraPanel.setBorder(new LineBorder(new Color(0, 255, 0), 3));
-		cameraPanel.add(PinkanellMain.getRecognizerInstance().getCameraPane());
+		cameraPanel.add(PinkanellMain.getCVManager().getCameraPane());
 		cameraPanel.setBounds(hotmapPanel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10),
 				640);
 		frame.getContentPane().add(cameraPanel);
@@ -243,4 +252,5 @@ public class MainWindow {
 	public JFrame getJFrame() {
 		return frame;
 	}
+	
 }

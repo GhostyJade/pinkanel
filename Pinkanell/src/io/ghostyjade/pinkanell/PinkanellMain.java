@@ -1,8 +1,9 @@
 package io.ghostyjade.pinkanell;
 
-import java.awt.EventQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import io.ghostyjade.opencv.BallRecognizer;
+import io.ghostyjade.opencv.CvManager;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.I18n;
 import io.ghostyjade.utils.Settings;
@@ -23,11 +24,10 @@ public class PinkanellMain {
 	 * The window instance
 	 */
 	private static MainWindow window;
-	/**
-	 * The ball recognizer instance
-	 */
-	private static BallRecognizer recognizer;
 
+	/**
+	 * The serial instance
+	 */
 	private static Serial serial;
 
 	/**
@@ -35,7 +35,20 @@ public class PinkanellMain {
 	 */
 	private static I18n i18n;
 
+	/**
+	 * The {@linkplain MathUtil math} instance
+	 */
 	private static MathUtil math;
+
+	/**
+	 * The {@linkplain CvManager OpenCV} class manager
+	 */
+	private static CvManager manager;
+
+	/**
+	 * Pool of threads, used to create new program's threads.
+	 */
+	public static ExecutorService serviceExecutor = Executors.newCachedThreadPool();
 
 	/**
 	 * The constructor, initialize all the components.
@@ -46,14 +59,14 @@ public class PinkanellMain {
 		i18n = new I18n(Constants.LOCALE_NAME);
 		window = new MainWindow();
 		math = new MathUtil();
-		recognizer = new BallRecognizer();
-		recognizer.init();
+		manager = new CvManager();
+		manager.init();
 
 		serial = new Serial(new GoalListener() {
 
 			@Override
 			public void actionPerform() {
-				math.performCalculation();// cambia tempo in pallina
+				math.performCalculation();
 				math.resetPoint();
 				window.updateScore();
 			}
@@ -67,28 +80,10 @@ public class PinkanellMain {
 	 * This function is used to create the window thread and the recognizer thread.
 	 */
 	private void createThreads() {
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				window.create();
-			}
-		});
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				recognizer.start();
-			}
-		});
+		manager.start();
 		serial.initialize();
-	}
-
-	/**
-	 * @return the {@link BallRecognizer recognizer} instance.
-	 */
-	public static BallRecognizer getRecognizerInstance() {
-		return recognizer;
+		window.create();
+		manager.postInit();
 	}
 
 	/**
@@ -100,7 +95,7 @@ public class PinkanellMain {
 	}
 
 	/**
-	 * @return the {@link I18n i18n} class instance.
+	 * @return the {@linkplain I18n i18n} class instance.
 	 */
 	public static I18n getI18n() {
 		return i18n;
@@ -113,10 +108,16 @@ public class PinkanellMain {
 		return window;
 	}
 
+	/**
+	 * @return the {@linkplain Serial serial} class instance.
+	 */
 	public static Serial getSerial() {
 		return serial;
 	}
 
+	/**
+	 * @return the {@linkplain MathUtil math} class instance
+	 */
 	public static MathUtil getMath() {
 		return math;
 	}
@@ -125,7 +126,15 @@ public class PinkanellMain {
 	 * Destroy the program. It closes serial communication and the camera.
 	 */
 	public static void destroy() {
+		serial.close();
+		manager.destroy();
+	}
 
+	/**
+	 * @return the {@linkplain CvManager OpenCV manager} instance.
+	 */
+	public static CvManager getCVManager() {
+		return manager;
 	}
 
 }

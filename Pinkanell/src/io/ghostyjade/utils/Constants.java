@@ -8,6 +8,9 @@ import java.util.Properties;
  * @author GhostyJade
  */
 public class Constants {
+	
+	public static final int MIN_CIRCLE_RADIUS = 1;
+	public static final int MAX_CIRCLE_RADIUS = 30;
 
 	/**
 	 * The field width
@@ -24,11 +27,11 @@ public class Constants {
 	public static String LOCALE_NAME;
 
 	/**
-	 * the proportion value
+	 * The proportion value
 	 */
 	public static double CONST_FIELD;
 
-	public static double FIELD_HEIGHT_DOTS;
+	public static double FIELD_HEIGHT_DOTS; //TODO set
 
 	/**
 	 * Initializes the fields with some values.
@@ -61,5 +64,4 @@ public class Constants {
 	
 }
 
-//TODO set constants (fieldheight and dotted), check if the value is NaN or infinite, check if Dou*ble is null
 

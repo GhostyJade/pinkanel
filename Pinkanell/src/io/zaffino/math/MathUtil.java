@@ -54,7 +54,7 @@ public class MathUtil {
 	 * @param p the new point
 	 */
 	public void addPoint(Point p) {
-		if (p.x() == 0 && p.y() == 0) //TODO move to BallRecognizer
+		if (p.x() == 0 && p.y() == 0) // TODO move to BallRecognizer
 			return;
 		if (lastPoint == null) {
 			timeOnMathStart = System.currentTimeMillis();
@@ -129,14 +129,12 @@ public class MathUtil {
 		averageSpeed = (sum / speedValues.size());
 	}
 
+	/**
+	 * Perform average calculation and max speed calculation.
+	 */
 	public void performCalculation() {
 		calculateAverageSpeed();
 		calculateMaxSpeed();
-	}
-
-	// TODO remove
-	public List<Point> getBallPositions() {
-		return ballPositions;
 	}
 
 }
