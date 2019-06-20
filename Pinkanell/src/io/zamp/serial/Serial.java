@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 
+import javax.swing.JOptionPane;
+
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.listener.GoalListener;
 
 /**
@@ -55,6 +58,7 @@ public class Serial implements SerialPortEventListener {
 		}
 		if (portId == null) {
 			System.out.println("Could not find COM port.");
+			JOptionPane.showMessageDialog(PinkanellMain.getWindow().getJFrame(), PinkanellMain.getI18n().getTranslationString("ui.messageE"), PinkanellMain.getI18n().getTranslationString("ui.error"), JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 

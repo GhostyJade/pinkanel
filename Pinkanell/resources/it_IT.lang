@@ -8,3 +8,7 @@ ui.player2=Giocatore 2
 ui.insertHeight=Inserisci l'altezza:
 ui.insertWidth=Inserisci la larghezza:
 ui.btnsave=Salva
+
+# Finestra Errore
+ui.error=Errore
+ui.messageE=Arduino non trovato

@@ -8,3 +8,7 @@ ui.player2=Player 2
 ui.insertHeight=Insert the field height:
 ui.insertWidth=Insert the field height:
 ui.btnsave=Save
+
+# Error window
+ui.error=Error
+ui.messageE=Couldn't find Arduino pls connect it

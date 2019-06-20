@@ -240,4 +240,8 @@ public class MainWindow {
 		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
 		//TODO set velocity
 	}
+	
+	public JFrame getJFrame() {
+		return frame;
+	}
 }
