@@ -41,13 +41,18 @@ public class Constants {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return a constant that represent the proportion between the real field and
+	 *         the scaled field.
 	 */
 	public void calculateConstFiled() {
 		CONST_FIELD = FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
 	}
 
+	/**
+	 * Initialize the class field using the specified properties.
+	 * 
+	 * @param p the loaded {@link Properties}
+	 */
 	public static void init(Properties p) {
 		FIELD_WIDHT = Integer.parseInt(p.getProperty("fieldWidth", "0"));
 		FIELD_HEIGHT = Integer.parseInt(p.getProperty("fieldHeight", "0"));
