@@ -129,5 +129,10 @@ public class MathUtil {
 		calculateAverageSpeed();
 		calculateMaxSpeed();
 	}
+	
+	//TODO remove
+	public List<Point> getBallPositions() {
+		return ballPositions;
+	}
 
 }
