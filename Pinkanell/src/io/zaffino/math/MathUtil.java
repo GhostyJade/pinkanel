@@ -122,7 +122,7 @@ public class MathUtil {
 	private void calculateAverageSpeed() {
 		double sum = 0;
 		for (int i = 0; i < speedValues.size(); i++) {
-			sum = speedValues.get(i);
+			sum += speedValues.get(i);
 		}
 		averageSpeed = sum / speedValues.size();
 	}
