@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.bytedeco.javacpp.annotation.Const;
+
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.Settings;
@@ -107,6 +109,10 @@ public class MenuWindow extends JFrame {
 		textFieldWidth.setBounds(193, 163, 98, 26);
 		contentPane.add(textFieldWidth);
 		textFieldWidth.setColumns(10);
+		
+		Constants.FIELD_HEIGHT = Integer.parseInt(comboHeigt.getItemAt(comboHeigt.getSelectedIndex()));
+		System.out.print(Constants.FIELD_HEIGHT);
+		
 	}
 
 	private void setNewLocale() {

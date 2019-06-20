@@ -40,17 +40,17 @@ public class Constants {
 		LOCALE_NAME = "it_IT";
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public void calculateConstFiled() {
+	
+	public static void calculateConstFiled() {
 		CONST_FIELD = FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
 	}
+	
 
 	public static void init(Properties p) {
 		FIELD_WIDHT = Integer.parseInt(p.getProperty("fieldWidth", "0"));
 		FIELD_HEIGHT = Integer.parseInt(p.getProperty("fieldHeight", "0"));
 		LOCALE_NAME = p.getProperty("locale", "it_IT");
 	}
+	
 }
+

@@ -42,8 +42,10 @@ public class PinkanellMain {
 		i18n = new I18n(Constants.LOCALE_NAME);
 		window = new MainWindow();
 		recognizer = new BallRecognizer();
+		recognizer.init();
 		serial = new Serial();
 		createThreads();
+		Constants.calculateConstFiled();
 	}
 
 	/**
