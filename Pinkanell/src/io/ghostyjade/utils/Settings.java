@@ -55,6 +55,8 @@ public class Settings {
 	 */
 	public static void storeSettingsToFile(String filename) {
 		File file = new File(filename);
+		if (file.exists())
+			file.delete();
 		try {
 			properties.store(new FileOutputStream(file), "Pinkanell's settings file");
 		} catch (IOException e) {

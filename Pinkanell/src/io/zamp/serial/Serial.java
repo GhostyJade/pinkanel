@@ -58,7 +58,9 @@ public class Serial implements SerialPortEventListener {
 		}
 		if (portId == null) {
 			System.out.println("Could not find COM port.");
-			JOptionPane.showMessageDialog(PinkanellMain.getWindow().getJFrame(), PinkanellMain.getI18n().getTranslationString("ui.messageE"), PinkanellMain.getI18n().getTranslationString("ui.error"), JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(PinkanellMain.getWindow().getJFrame(),
+					PinkanellMain.getI18n().getTranslationString("ui.messageE"),
+					PinkanellMain.getI18n().getTranslationString("ui.error"), JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
