@@ -170,7 +170,6 @@ public class MainWindow {
 	public void changeToCameraPreview() {
 		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
 		hotmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
-		System.out.println(hotmapPanel.getSize());
 
 		lblVmax.setBounds(61, 654, 358, 72);
 		valueVmed.setBounds(445, 750, 193, 96);
@@ -202,7 +201,6 @@ public class MainWindow {
 	 */
 	public void changeToGoal() {
 		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
-
 		goal = new JLabel("GOOOOOOOAL");
 		goal.setBounds(0, 0, (Toolkit.getDefaultToolkit().getScreenSize().width),
 				Toolkit.getDefaultToolkit().getScreenSize().height);
@@ -233,5 +231,13 @@ public class MainWindow {
 		player1.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
 		player2.setText(PinkanellMain.getI18n().getTranslationString("ui.player1"));
 
+	}
+
+	public void updateScore() {
+		points1.setText(String.valueOf(PinkanellMain.getSerial().getTeamOneScore()));		
+		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
+		valueVmax.setText(String.valueOf(PinkanellMain.getMath().getMaxSpeed()));
+		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
+		//TODO set velocity
 	}
 }

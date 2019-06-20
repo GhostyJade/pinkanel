@@ -8,6 +8,7 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import io.ghostyjade.utils.listener.GoalListener;
 
 /**
  *
@@ -15,6 +16,8 @@ import gnu.io.SerialPortEventListener;
  * @since v1.0
  */
 public class Serial implements SerialPortEventListener {
+
+	private GoalListener listener;
 
 	private SerialPort serialPort;
 
@@ -27,9 +30,8 @@ public class Serial implements SerialPortEventListener {
 	 */
 	private int point2;
 
-	private static final String PORT_NAMES[] = { 
-			//"/dev/tty.usbmodem14201", // Mac OS X
-			"/dev/tty.usbmodemFD121",
+	private static final String PORT_NAMES[] = { "/dev/tty.usbmodem14201", // Mac OS X
+			// "/dev/tty.usbmodemFD121",
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
@@ -74,6 +76,7 @@ public class Serial implements SerialPortEventListener {
 			try {
 				String inputLine = input.readLine();
 				assignPoint(inputLine);
+				listener.actionPerform();
 			} catch (Exception e) {
 			}
 		}
@@ -89,21 +92,23 @@ public class Serial implements SerialPortEventListener {
 		}
 	}
 
-	public Serial() {
-		this("0");
+	public Serial(GoalListener listener) {
+		this("0", listener);
 	}
 
-	public Serial(String ncom) {
+	public Serial(String ncom, GoalListener listener) {
+		this.listener = listener;
 		if (Integer.parseInt(ncom) >= 3 && Integer.parseInt(ncom) <= 9)
 			PORT_NAMES[2] = "COM" + ncom;
 		System.out.println("Serial Comms Started");
 	}
 
 	private void assignPoint(String s) {
-		System.out.println(s);
+		if (s.contains("-1"))
+			return;
 		if (s.startsWith("1"))
 			point1 = Integer.parseInt(s.substring(1, s.length()));
-		else
+		if (s.startsWith("2"))
 			point2 = Integer.parseInt(s.substring(1, s.length()));
 	}
 

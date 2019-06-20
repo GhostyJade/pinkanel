@@ -8,4 +8,4 @@ You only need an arduino, a raspberry, a cam module, 2 ultrasonic sensor, and a 
 **we are a lazy and always late ("NOT QUITE MY TEMPO 💪") group**
 
 
-Our program is like a dog: it looks a ball...and it love the ball.
+Our program is like a dog: it looks at ball...and it loves the ball.
