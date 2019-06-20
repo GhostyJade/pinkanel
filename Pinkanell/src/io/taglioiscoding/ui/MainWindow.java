@@ -238,7 +238,6 @@ public class MainWindow {
 		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
 		valueVmax.setText(String.valueOf(PinkanellMain.getMath().getMaxSpeed()));
 		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
-		//TODO set velocity
 	}
 	
 	public JFrame getJFrame() {

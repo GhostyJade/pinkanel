@@ -48,18 +48,20 @@ public class MathUtil {
 	 */
 	private Point lastPoint;
 
-
 	/**
 	 * Add a new point to the point list and calculate the speed at that moment
 	 * 
 	 * @param p the new point
 	 */
 	public void addPoint(Point p) {
+		if (p.x() == 0 && p.y() == 0)
+			return;
 		if (lastPoint == null) {
 			timeOnMathStart = System.currentTimeMillis();
 			lastPoint = p;
 			return;
 		}
+		System.out.println(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD));
 		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD)); // FIXME ground size!
 		lastPoint = p;
 	}
@@ -124,13 +126,13 @@ public class MathUtil {
 		}
 		averageSpeed = sum / speedValues.size();
 	}
-	
+
 	public void performCalculation() {
 		calculateAverageSpeed();
 		calculateMaxSpeed();
 	}
-	
-	//TODO remove
+
+	// TODO remove
 	public List<Point> getBallPositions() {
 		return ballPositions;
 	}

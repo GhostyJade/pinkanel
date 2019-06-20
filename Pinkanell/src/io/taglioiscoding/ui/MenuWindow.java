@@ -4,20 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import org.bytedeco.javacpp.annotation.Const;
 
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.Settings;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
 
 public class MenuWindow extends JFrame {
 	private static final long serialVersionUID = 1L;

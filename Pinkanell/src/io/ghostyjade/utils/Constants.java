@@ -36,7 +36,7 @@ public class Constants {
 	static {
 		FIELD_WIDHT = 0;
 		FIELD_HEIGHT = 0;
-		FIELD_HEIGHT_DOTS = 0;
+		FIELD_HEIGHT_DOTS = 120;
 		LOCALE_NAME = "it_IT";
 	}
 
@@ -45,7 +45,7 @@ public class Constants {
 	 *         the scaled field.
 	 */
 	public static void calculateConstFiled() {
-		CONST_FIELD = FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
+		CONST_FIELD =1;//= FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
 	}	
 
 	/**
@@ -60,4 +60,6 @@ public class Constants {
 	}
 	
 }
+
+//TODO set constants (fieldheight and dotted), check if the value is NaN or infinite, check if Double is null
 
