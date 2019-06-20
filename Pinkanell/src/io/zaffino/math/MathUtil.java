@@ -54,14 +54,16 @@ public class MathUtil {
 	 * @param p the new point
 	 */
 	public void addPoint(Point p) {
-		if (p.x() == 0 && p.y() == 0)
+		if (p.x() == 0 && p.y() == 0) //TODO move to BallRecognizer
 			return;
 		if (lastPoint == null) {
 			timeOnMathStart = System.currentTimeMillis();
 			lastPoint = p;
 			return;
 		}
-		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD)); // FIXME ground size!
+		Double d = calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD);
+		if (!d.isInfinite())
+			speedValues.add(d); // FIXME ground size!
 		lastPoint = p;
 		timeOnMathStart = System.currentTimeMillis();
 	}
@@ -124,7 +126,7 @@ public class MathUtil {
 		for (int i = 0; i < speedValues.size(); i++) {
 			sum += speedValues.get(i);
 		}
-		averageSpeed = sum / speedValues.size();
+		averageSpeed = (sum / speedValues.size());
 	}
 
 	public void performCalculation() {

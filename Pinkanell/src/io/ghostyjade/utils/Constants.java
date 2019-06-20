@@ -61,5 +61,5 @@ public class Constants {
 	
 }
 
-//TODO set constants (fieldheight and dotted), check if the value is NaN or infinite, check if Double is null
+//TODO set constants (fieldheight and dotted), check if the value is NaN or infinite, check if Dou*ble is null
 
