@@ -78,7 +78,7 @@ public class CvManager {
 	/**
 	 * If the rendering is enabled, render the camera frame to the preview.
 	 */
-	public void render() {
+	public void render() { //FIXME MOVE.
 		if (renderingEnabled) {
 			frame.showImage(converter.convert(cameraInstance.getCurrentFrame()));
 		}

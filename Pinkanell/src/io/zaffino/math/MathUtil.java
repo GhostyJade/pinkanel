@@ -86,6 +86,7 @@ public class MathUtil {
 	 */
 	public void resetPoint() {
 		ballPositions.clear();
+		speedValues.clear();
 	}
 
 	/**
@@ -133,8 +134,8 @@ public class MathUtil {
 	 * Perform average calculation and max speed calculation.
 	 */
 	public void performCalculation() {
-		calculateAverageSpeed();
 		calculateMaxSpeed();
+		calculateAverageSpeed();
 	}
 
 }
