@@ -46,6 +46,8 @@ public class BallRecognizer implements Runnable {
 	 * A list of points.
 	 */
 	private List<Point> points = new CopyOnWriteArrayList<>();
+	
+	private boolean rendering = false;
 
 	/**
 	 * 
@@ -74,10 +76,11 @@ public class BallRecognizer implements Runnable {
 	public void run() {
 		while (running) {
 			recognizeBall();
+			if(rendering) render();
 		}
 	}
 
-	public void render() {
+	private void render() {
 		for (int i = 0; i < circles.get().length; i++) {
 			float c[] = new float[circles.get(i).sizeof()];
 			circles.get(i).get(c);
@@ -96,5 +99,9 @@ public class BallRecognizer implements Runnable {
 
 	public void destroy() {
 		running = false;
+	}
+	
+	public void setRendering(boolean rendering) {
+		this.rendering = rendering;
 	}
 }

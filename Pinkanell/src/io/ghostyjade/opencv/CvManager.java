@@ -80,7 +80,6 @@ public class CvManager {
 	 */
 	public void render() {
 		if (renderingEnabled) {
-			ballRecognizer.render();
 			frame.showImage(converter.convert(cameraInstance.getCurrentFrame()));
 		}
 	}
@@ -110,6 +109,7 @@ public class CvManager {
 		frame = new CanvasFrame("Pallettah-Recognition", 1);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setVisible(false);
+		ballRecognizer.setRendering(true);
 		renderingEnabled = true;
 		PinkanellMain.serviceExecutor.execute(new Runnable() {
 
@@ -126,6 +126,7 @@ public class CvManager {
 	 * Destroys the panel used to rendering
 	 */
 	public void destroyPanel() {
+		ballRecognizer.setRendering(false);
 		renderingEnabled = false;
 		frame = null;
 	}
