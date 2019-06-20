@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import io.ghostyjade.opencv.BallRecognizer;
 import io.ghostyjade.utils.Constants;
-import io.ghostyjade.utils.Debug;
 import io.ghostyjade.utils.I18n;
 import io.ghostyjade.utils.Settings;
 import io.ghostyjade.utils.listener.GoalListener;
@@ -49,13 +48,12 @@ public class PinkanellMain {
 		math = new MathUtil();
 		recognizer = new BallRecognizer();
 		recognizer.init();
-		
+
 		serial = new Serial(new GoalListener() {
 
 			@Override
 			public void actionPerform() {
-				System.out.println(Debug.printBallPointPen(math.getBallPositions()));
-				math.performCalculation();
+				math.performCalculation();// cambia tempo in pallina
 				math.resetPoint();
 				window.updateScore();
 			}

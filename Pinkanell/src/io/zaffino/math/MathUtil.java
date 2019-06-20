@@ -61,9 +61,9 @@ public class MathUtil {
 			lastPoint = p;
 			return;
 		}
-		System.out.println(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD));
 		speedValues.add(calculateSpeed(calculateSpace(p, lastPoint) * Constants.CONST_FIELD)); // FIXME ground size!
 		lastPoint = p;
+		timeOnMathStart = System.currentTimeMillis();
 	}
 
 	/**
