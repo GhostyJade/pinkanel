@@ -58,10 +58,4 @@ public class Renderer {
 		setPixel(x, y, calculateColor(x, y));
 	}
 
-	public void clear() {
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0;
-		}
-	}
-
 }

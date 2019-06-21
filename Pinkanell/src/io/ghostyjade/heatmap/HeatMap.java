@@ -59,9 +59,5 @@ public class HeatMap extends Canvas implements Runnable {
 			render();
 		}
 	}
-	
-	public void clear() {
-		renderer.clear();
-	}
 
 }
