@@ -1,3 +1,17 @@
-- Telecamera: più sono i frame, più la definizione è alta, meglio è. Le prestazioni con una 720p 30 fps sono mediocri, la velocità massima/media non è analizzabile in quanto ad un gioco sostenuto la palla fa fatica ad essere visualizzata. Con una telecamera ad alta definizione si potrà aver maggior dettaglio nelle immagini per un più facile rilevamento della pallina; una capacità di scattare un maggior numero di frame per secondo permetterà di avere più possibilità di rilevare la pallina nell'unità di tempo. Tutto ciò aumenterà la precisione di rilevamento della pallina, quindi il calcolo della velocità massima/media.
-- Elaboratore: una telecamera più prestazionale rilascerà un enorme quantitativo di dati, che un semplice Raspberry non riuscirebbe a elaborare. L'ideale sarebbe un buon computer con una buona capacità di elaborazione. Nella migliore delle ipotesi, l'elaboratore potrebbe dover analizzare 200 frame in FullHD+ al secondo, dovendo far partire 4 thread differenti: camera, riconoscimento pallina, seriale e rendering. Tutto ciò necessita di un buon elaboratore.
-- Campo: migliorare le circostanze aiuterebbe di molto la telecamera e l'elaboratore; l'ideale potrebbe essere un campo nero con una pallina gialla, così da renderla perfettamente visibile alla telecamera. Il pincanello potrebbe avere un alloggio per l'unità elaboratrice alla sua base, con un display per il settaggio delle impostazioni e del programma. Una struttura in metallo è necessaria per l'alloggiamento della telecamera in alto. A suo supporto potrebbe essere installata una plafoniera con luci a led e superficie opaca così da evitare riflessioni, in questo modo si potrà assicurare un'ottima illuminazione sempre. Il campo del pincanello stesso converrebbe esser opaco per evitare riflessioni. Conveniente potrebbe essere l'acquisto di un pincanello senza oggetti di forma circolare simile a quella della pallina per evitare il loro rilevamento. Devono essere contemplati anche i due alloggi alla base delle due porte per i sensori ad ultrasuoni che dovranno essere collegati all'arduino, esso collegato all'elaboratore: il pincanello dovrà poter supportare ciò.
+- camera: the more frames there are, the higher is the definition, the better it is. Performances with a  720p 30 fps are mediocre, 
+the maximum/average speed are not misurable as at a higher game rate the ball is hard to be detected. With a higher definition camera you 
+will be able to have more detail in the images for easier detection of the ball; being able to take more frames per second will allow you 
+to have more chances to detect the ball in a unit of time. All this will increase the accuracy of the ball detection, therefore the
+calculation of the maximum/average speed.
+- computer: a higher performance camera will give in output an enormous amount of data, which a normal Raspberry would not be able to 
+process. The best would be a good computer with good processing capacity. In the best case, the processor may have to analyze 200 frames 
+in FullHD+ per second, having to start 4 different threads: camera thread, ball recognition thread, serial thread and rendering thread. 
+All this requires a good computer.
+- game field: improving the circumstances would greatly help the camera and the computer; the ideal could be a black field with a yellow 
+ball, to make the ball perfectly visible to the camera. The foosball could have a store for the processing unit at its base, with a 
+display for the various program settings. A metal frame is required for storing the camera at the top. To its support a ceiling light 
+could be installed  with LED lights and a matte surface to avoid reflections, in this way it will be possible to always ensure excellent 
+lighting . The foosball field itself should be matte to avoid reflections. It may be convenient to purchase a foosball without circular 
+objects similar to the ball to avoid their erroneous detection. The There will be two storages at the base of the two goal doors for the 
+ultrasonic sensors that must be connected to the arduino. The arduino has to be connected to the processor, the foosball must be able to 
+support this.
