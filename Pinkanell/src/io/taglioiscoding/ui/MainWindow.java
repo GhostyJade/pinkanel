@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import org.bytedeco.opencv.opencv_core.Point;
+
+import io.ghostyjade.heatmap.HeatMap;
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Settings;
 
@@ -31,7 +34,7 @@ public class MainWindow {
 	/**
 	 * The panels used to contain the hotmap and the camera preview
 	 */
-	private JPanel hotmapPanel, cameraPanel;
+	private JPanel heatmapPanel, cameraPanel;
 	/**
 	 * Some labels that stores players score and speed values.
 	 */
@@ -41,6 +44,8 @@ public class MainWindow {
 	 * The font instance, used to display texts
 	 */
 	private final Font lucidaGrande40 = new Font("Lucida Grande", Font.PLAIN, 40);
+
+	private HeatMap map;
 
 	/**
 	 * Create the application.
@@ -65,9 +70,11 @@ public class MainWindow {
 				Toolkit.getDefaultToolkit().getScreenSize().height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(closeWindow());
-		hotmapPanel = new JPanel();
-		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
-		hotmapPanel.setBounds(6, 30, 826, 592);
+		heatmapPanel = new JPanel();
+		heatmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
+		heatmapPanel.setBounds(6, 30, 826, 592);
+		map = new HeatMap(heatmapPanel.getSize());
+		heatmapPanel.add(map);
 
 		lblVmax = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.maxspeed"));
 		lblVmax.setFont(lucidaGrande40);
@@ -104,7 +111,7 @@ public class MainWindow {
 		points2.setFont(new Font("Lucida Grande", Font.PLAIN, 99));
 
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(hotmapPanel);
+		frame.getContentPane().add(heatmapPanel);
 		frame.getContentPane().add(lblVmax);
 		frame.getContentPane().add(valueVmed);
 		frame.getContentPane().add(lblVmed);
@@ -149,7 +156,7 @@ public class MainWindow {
 				if (e.getKeyCode() == KeyEvent.VK_M)
 					changeToMatchPreview();
 				if (e.getKeyCode() == KeyEvent.VK_S)
-					new MenuWindow().showWindow();
+					new SettingsWindow().showWindow();
 			}
 		};
 	}
@@ -167,7 +174,7 @@ public class MainWindow {
 		points1.setBounds(460, 652, 104, 197);
 		points2.setBounds(731, 630, 206, 236);
 		scoreDivisor.setBounds(657, 702, 73, 96);
-		hotmapPanel.setBounds(6, 30, 826, 592);
+		heatmapPanel.setBounds(6, 30, 826, 592);
 		if (cameraPanel != null)
 			frame.getContentPane().remove(cameraPanel);
 		PinkanellMain.getCVManager().destroyPanel();
@@ -177,8 +184,8 @@ public class MainWindow {
 	 * Preview of camera vision that we used for debugging
 	 */
 	public void changeToCameraPreview() {
-		hotmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
-		hotmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
+		heatmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
+		heatmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 
 		lblVmax.setBounds(61, 654, 358, 72);
 		valueVmed.setBounds(445, 750, 193, 96);
@@ -200,8 +207,8 @@ public class MainWindow {
 		cameraPanel = new JPanel();
 		cameraPanel.setBorder(new LineBorder(new Color(0, 255, 0), 3));
 		cameraPanel.add(PinkanellMain.getCVManager().getCameraPane());
-		cameraPanel.setBounds(hotmapPanel.getWidth(), 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10),
-				640);
+		cameraPanel.setBounds(heatmapPanel.getWidth(), 0,
+				((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 		frame.getContentPane().add(cameraPanel);
 	}
 
@@ -209,7 +216,7 @@ public class MainWindow {
 	 * First test for the goal animation
 	 */
 	public void changeToGoal() {
-		hotmapPanel.setBorder(new LineBorder(Color.RED, 3));
+		heatmapPanel.setBorder(new LineBorder(Color.RED, 3));
 		goal = new JLabel("GOOOOOOOAL");
 		goal.setBounds(0, 0, (Toolkit.getDefaultToolkit().getScreenSize().width),
 				Toolkit.getDefaultToolkit().getScreenSize().height);
@@ -227,6 +234,7 @@ public class MainWindow {
 	 */
 	public void create() {
 		frame.setVisible(true);
+		PinkanellMain.serviceExecutor.execute(map);
 	}
 
 	/**
@@ -243,14 +251,18 @@ public class MainWindow {
 	}
 
 	public void updateScore() {
-		points1.setText(String.valueOf(PinkanellMain.getSerial().getTeamOneScore()));		
+		points1.setText(String.valueOf(PinkanellMain.getSerial().getTeamOneScore()));
 		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
 		valueVmax.setText(String.valueOf(PinkanellMain.getMath().getMaxSpeed()));
 		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
 	}
-	
+
 	public JFrame getJFrame() {
 		return frame;
 	}
-	
+
+	public void setPoint(Point p) {
+		map.setPoint(p);
+	}
+
 }

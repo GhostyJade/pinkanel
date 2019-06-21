@@ -67,7 +67,9 @@ public class BallRecognizer implements Runnable {
 		for (int i = 0; i < circles.get().length; i++) {
 			float c[] = new float[circles.get(i).sizeof()];
 			circles.get(i).get(c);
-			PinkanellMain.getMath().addPoint(new Point(Math.round(c[0]), Math.round(c[1])));
+			Point p = new Point(Math.round(c[0]), Math.round(c[1]));
+			PinkanellMain.getWindow().setPoint(p);
+			PinkanellMain.getMath().addPoint(p);
 		}
 	}
 

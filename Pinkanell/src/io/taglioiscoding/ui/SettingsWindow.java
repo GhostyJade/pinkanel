@@ -16,7 +16,7 @@ import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.Settings;
 
-public class MenuWindow extends JFrame {
+public class SettingsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
@@ -37,7 +37,7 @@ public class MenuWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuWindow() {
+	public SettingsWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
