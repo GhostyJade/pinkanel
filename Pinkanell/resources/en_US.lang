@@ -12,3 +12,6 @@ ui.btnsave=Save
 # Error window
 ui.error=Error
 ui.messageE=Couldn't find Arduino pls connect it
+
+# You win window
+ui.win=You win!

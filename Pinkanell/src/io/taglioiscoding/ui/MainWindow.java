@@ -229,7 +229,7 @@ public class MainWindow {
 	}
 	
 	public void changeToWinScreen() {	
-		JLabel lblHaiVinto = new JLabel("Hai Vinto!");
+		JLabel lblHaiVinto = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.win"));
 		lblHaiVinto.setBounds(169, 130, 67, 16);
 		frame.getContentPane().add(lblHaiVinto);
 		System.exit(0);

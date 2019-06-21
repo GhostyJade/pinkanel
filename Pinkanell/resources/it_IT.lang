@@ -12,3 +12,6 @@ ui.btnsave=Salva
 # Finestra Errore
 ui.error=Errore
 ui.messageE=Arduino non trovato
+
+# You win window
+ui.win=Hai vinto!
