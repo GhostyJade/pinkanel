@@ -28,7 +28,7 @@ public class Renderer {
 		int red = ((srcColor >> 16) & 0xFF);
 		int green = ((srcColor >> 8) & 0xFF);
 		int blue = ((srcColor >> 0) & 0xFF);
-		if ((red == green) && (red < 255 || green < 255)) {
+		if ((red == green) && (red < 250 || green < 250)) {
 			red = green = (red + VALUE);
 		} else {
 			if (green > 0) {
@@ -38,7 +38,7 @@ public class Renderer {
 		return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
 	}
 
-	private final int VALUE = 5;
+	private final int VALUE = 25;
 
 	public void setPixel(int x, int y, int color) {
 		if (x < 0 || y < 0 || x > width || y > height)
@@ -56,12 +56,6 @@ public class Renderer {
 
 	public void setPoint(int x, int y) {
 		setPixel(x, y, calculateColor(x, y));
-	}
-
-	public void clear() {
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = 0;
-		}
 	}
 
 }

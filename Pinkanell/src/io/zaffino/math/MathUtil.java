@@ -54,8 +54,6 @@ public class MathUtil {
 	 * @param p the new point
 	 */
 	public void addPoint(Point p) {
-		if (p.x() == 0 && p.y() == 0) // TODO move to BallRecognizer
-			return;
 		if (lastPoint == null) {
 			timeOnMathStart = System.currentTimeMillis();
 			lastPoint = p;
