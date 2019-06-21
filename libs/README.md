@@ -11,4 +11,4 @@ You must include:
   - rxtx-2.1.7.jar
   - rxtx-native-*platform*.jar (used to specify the natives)
 
-you can follow [this link](http://rxtx.qbang.org/wiki/index.php/Installation) to install lib RxTx 
+You can follow [this link](http://rxtx.qbang.org/wiki/index.php/Installation) to install lib RxTx 
