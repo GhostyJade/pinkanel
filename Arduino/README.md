@@ -2,7 +2,6 @@
 This folder contains the sketch of arduino that our group 
 utilized to track the number of goals scored during a game
 of foosball.
-This is the final sketch depending on how the test phase on the table goes 
 
 # Components 
 This is the list of components that we have used in this part of project:
