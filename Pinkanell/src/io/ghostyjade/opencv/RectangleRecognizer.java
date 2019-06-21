@@ -7,7 +7,7 @@ import static org.bytedeco.opencv.global.opencv_imgproc.findContours;
 import org.bytedeco.opencv.opencv_core.MatVector;
 
 /**
- * 
+ * THIS CLASS IS NOT IMPLEMENTED YET.
  * 
  * @author GhostyJade
  */

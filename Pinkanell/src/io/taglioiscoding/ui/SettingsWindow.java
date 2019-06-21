@@ -16,6 +16,12 @@ import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.Settings;
 
+/**
+ * This is the settings window. It allows to set some program constants, such as
+ * language and the field dimension.
+ * 
+ * @author taglioIsCoding
+ */
 public class SettingsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
@@ -24,15 +30,11 @@ public class SettingsWindow extends JFrame {
 	private JLabel lblInsertTheField_1, lblInsertTheField;
 	private JLabel lblCm_1;
 	private JComboBox<String> comboWidth; // TODO change to JTextArea
-	private JComboBox<String> comboHeigt; // TODO change to JTextArea
+	private JComboBox<String> comboHeight; // TODO change to JTextArea
 	private JComboBox<String> comboLang;
 	private JButton btnSave;
-	private JTextField textFieldHeigth;
 	private JTextField textFieldWidth;
-
-	/**
-	 * Launch the application.
-	 */
+	private JTextField textFieldHeigth;
 
 	/**
 	 * Create the frame.
@@ -71,10 +73,10 @@ public class SettingsWindow extends JFrame {
 		comboWidth.setBounds(168, 131, 123, 27);
 		contentPane.add(comboWidth);
 
-		comboHeigt = new JComboBox<String>();
-		comboHeigt.setModel(new DefaultComboBoxModel<String>(new String[] { "100", "110", "120","130", "140" }));
-		comboHeigt.setBounds(168, 165, 123, 27);
-		contentPane.add(comboHeigt);
+		comboHeight = new JComboBox<String>();
+		comboHeight.setModel(new DefaultComboBoxModel<String>(new String[] { "100", "110", "120", "130", "140" }));
+		comboHeight.setBounds(168, 165, 123, 27);
+		contentPane.add(comboHeight);
 
 		btnSave = new JButton(PinkanellMain.getI18n().getTranslationString("ui.btnsave"));
 		btnSave.setBounds(315, 225, 117, 29);
@@ -86,32 +88,32 @@ public class SettingsWindow extends JFrame {
 				try {
 					Settings.updateSettings(Constants.LOCALE_NAME,
 							Integer.valueOf(comboWidth.getItemAt(comboWidth.getSelectedIndex())),
-							Integer.valueOf(comboHeigt.getItemAt(comboHeigt.getSelectedIndex())));
-				} catch (Exception ex) {
-					ex.printStackTrace(); // This exception will be a NumberFormatException()
+							Integer.valueOf(comboHeight.getItemAt(comboHeight.getSelectedIndex())));
+				} catch (NumberFormatException ex) {
+					System.err.println("The specified value is invalid.");
 				}
 				PinkanellMain.getI18n().loadLocale(Constants.LOCALE_NAME);
 				reloadTexts();
-				PinkanellMain.getWindow().reloadTexts();
 			}
 		});
 		contentPane.add(btnSave);
-		
+
 		textFieldHeigth = new JTextField();
 		textFieldHeigth.setBounds(193, 130, 98, 26);
 		contentPane.add(textFieldHeigth);
 		textFieldHeigth.setColumns(10);
-		
+
 		textFieldWidth = new JTextField();
 		textFieldWidth.setBounds(193, 163, 98, 26);
 		contentPane.add(textFieldWidth);
 		textFieldWidth.setColumns(10);
-		
-		Constants.FIELD_HEIGHT = Integer.parseInt(comboHeigt.getItemAt(comboHeigt.getSelectedIndex()));
-		System.out.print(Constants.FIELD_HEIGHT);
-		
+
+		Constants.FIELD_HEIGHT = Integer.parseInt(comboHeight.getItemAt(comboHeight.getSelectedIndex()));
 	}
 
+	/**
+	 * Set the locale using the specified value.
+	 */
 	private void setNewLocale() {
 		String s = comboLang.getItemAt(comboLang.getSelectedIndex());
 		switch (s) {
@@ -124,13 +126,19 @@ public class SettingsWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * Reloads the UI texts.
+	 */
 	public void reloadTexts() {
+		PinkanellMain.getWindow().reloadTexts();
 		lblInsertTheField.setText(PinkanellMain.getI18n().getTranslationString("ui.insertWidth"));
 		lblInsertTheField_1.setText(PinkanellMain.getI18n().getTranslationString("ui.insertHeight"));
 		btnSave.setText(PinkanellMain.getI18n().getTranslationString("ui.btnsave"));
-
 	}
 
+	/**
+	 * Shows the window.
+	 */
 	public void showWindow() {
 		setVisible(true);
 	}

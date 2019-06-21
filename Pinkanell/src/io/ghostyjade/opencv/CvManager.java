@@ -13,7 +13,7 @@ import org.bytedeco.opencv.opencv_core.Mat;
 import io.ghostyjade.pinkanell.PinkanellMain;
 
 /**
- * This class manage the {@linkplain CameraFramer camera} acquisition. Also,
+ * This class manages the {@linkplain CameraFramer camera} acquisition. Also, it
  * creates the {@linkplain BallRecognizer ball recognizer} instance and the
  * {@linkplain RectangleRecognizer rectangle recognizer} instance.
  * 
@@ -107,20 +107,11 @@ public class CvManager {
 	 * Creates the panel used to rendering.
 	 */
 	public void createPanel() {
-		frame = new CanvasFrame("Pallettah-Recognition", 1);
+		frame = new CanvasFrame("JavaCV - Camera recognition", 1);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setVisible(false);
 		ballRecognizer.setRendering(true);
 		renderingEnabled = true;
-		// PinkanellMain.serviceExecutor.execute(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				while (cameraInstance.isCameraAlive()) {
-//					render();
-//				}
-//			}
-//		});
 	}
 
 	/**
@@ -133,12 +124,15 @@ public class CvManager {
 	}
 
 	/**
-	 * @return the frame internal container.
+	 * @return the frame's internal container.
 	 */
 	public Container getCameraPane() {
 		return frame.getContentPane();
 	}
 
+	/**
+	 * @return the camera's width and height
+	 */
 	public Dimension getCameraDimension() {
 		return new Dimension(cameraInstance.getCameraWidth(), cameraInstance.getCameraHeight());
 	}

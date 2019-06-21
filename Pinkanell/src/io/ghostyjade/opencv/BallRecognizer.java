@@ -29,6 +29,9 @@ import io.ghostyjade.utils.Constants;
  */
 public class BallRecognizer implements Runnable {
 
+	/**
+	 * The camera framer instance
+	 */
 	private CameraFramer cameraInstance;
 
 	/**
@@ -46,10 +49,23 @@ public class BallRecognizer implements Runnable {
 	 */
 	private List<Point> points = new CopyOnWriteArrayList<>();
 
+	/**
+	 * Is this rendering?
+	 */
 	private boolean rendering = false;
 
 	/**
+	 * Class constructor.
 	 * 
+	 * @param cameraInstance the camera instance object
+	 */
+	public BallRecognizer(CameraFramer cameraInstance) {
+		this.cameraInstance = cameraInstance;
+		running = true;
+	}
+
+	/**
+	 * Try to recognize all the circle present in the grabbed frame.
 	 */
 	public void recognizeBall() {
 		points.clear();
@@ -76,6 +92,9 @@ public class BallRecognizer implements Runnable {
 		}
 	}
 
+	/**
+	 * Render and recognize all the circles in the current frame
+	 */
 	@Override
 	public void run() {
 		while (running) {
@@ -85,6 +104,9 @@ public class BallRecognizer implements Runnable {
 		}
 	}
 
+	/**
+	 * Render all the circles present in the current frame
+	 */
 	private void render() {
 		for (int i = 0; i < circles.get().length; i++) {
 			float c[] = new float[circles.get(i).sizeof()];
@@ -98,16 +120,19 @@ public class BallRecognizer implements Runnable {
 		PinkanellMain.getCVManager().render();
 	}
 
-	public BallRecognizer(CameraFramer cameraInstance) {
-		this.cameraInstance = cameraInstance;
-		running = true;
-	}
-
+	/**
+	 * Stop this thread
+	 */
 	public void destroy() {
 		running = false;
 	}
 
-	public void setRendering(boolean rendering) {
-		this.rendering = rendering;
+	/**
+	 * Set if rendering is enabled.
+	 * 
+	 * @param value the value.
+	 */
+	public void setRendering(boolean value) {
+		this.rendering = value;
 	}
 }

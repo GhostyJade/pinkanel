@@ -9,21 +9,56 @@ import java.awt.image.DataBufferInt;
 
 import org.bytedeco.opencv.opencv_core.Point;
 
+/**
+ * The heatmap shows how many times the ball has gone on a certain point.
+ * 
+ * @author GhostyJade
+ */
 public class HeatMap extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
-	private int width, height;
+	/**
+	 * The image width
+	 */
+	private int width;
+	/**
+	 * The image height
+	 */
+	private int height;
 
-	private int scale = 3;
+	/**
+	 * The scale factor
+	 */
+	private final int scale = 9;
 
+	/**
+	 * The rendered image
+	 */
 	private BufferedImage image;
+	/**
+	 * The image data. It stores colors as integer values
+	 */
 	private int[] pixels;
 
+	/**
+	 * The renderer object
+	 */
 	private Renderer renderer;
 
-	public HeatMap(Dimension d, Dimension canvasSize) {
-		this.width = d.width;
-		this.height = d.height;
+	/**
+	 * Is rendering?
+	 */
+	private boolean render = true;
+
+	/**
+	 * The Class constructor.
+	 * 
+	 * @param imgSize    the image dimension
+	 * @param canvasSize the canvas dimension
+	 */
+	public HeatMap(Dimension imgSize, Dimension canvasSize) {
+		this.width = imgSize.width;
+		this.height = imgSize.height;
 		image = new BufferedImage(width / scale, height / scale, BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 		renderer = new Renderer(width / scale, height / scale);
@@ -32,10 +67,18 @@ public class HeatMap extends Canvas implements Runnable {
 		setMinimumSize(canvasSize);
 	}
 
+	/**
+	 * Set the specified value to the heatmap.
+	 * 
+	 * @param p the new point
+	 */
 	public void setPoint(Point p) {
-		renderer.setPoint(p.x() / scale, p.y() / scale);// FIXME
+		renderer.setPoint(p.x() / scale, p.y() / scale);
 	}
 
+	/**
+	 * Render the heatmap to the canvas
+	 */
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -51,8 +94,9 @@ public class HeatMap extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	private boolean render = true;
-
+	/**
+	 * Updates and render the canvas.
+	 */
 	@Override
 	public void run() {
 		while (render) {

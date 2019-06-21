@@ -1,6 +1,7 @@
 package io.zamp.serial;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 
@@ -14,35 +15,83 @@ import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.listener.GoalListener;
 
 /**
+ * This class provides a bridge between this application and the Arduino board
+ * using USB as serial communication.
  *
  * @author Zamp
  * @since v1.0
  */
 public class Serial implements SerialPortEventListener {
 
+	/**
+	 * The goal listener object. Used to perform an action when a goal is performed
+	 */
 	private GoalListener listener;
 
+	/**
+	 * The serial port object
+	 */
 	private SerialPort serialPort;
 
 	/**
-	 * 
+	 * Team one score
 	 */
 	private int point1;
 	/**
-	 * 
+	 * Team two score
 	 */
 	private int point2;
 
+	/**
+	 * An array that stores all the port names for every operating system
+	 */
 	private static final String PORT_NAMES[] = { "/dev/tty.usbmodem14201", // Mac OS X
 			// "/dev/tty.usbmodemFD121",
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
 
+	/**
+	 * The input stream used to retrieve data from Arduino
+	 */
 	private BufferedReader input;
+	/**
+	 * Time before the com port is out.
+	 */
 	private static final int TIME_OUT = 2000;
+	/**
+	 * The baud rate. This value MUST be the same as the Arduino's serial one.
+	 */
 	private static final int BAUD_RATE = 9600;
 
+	/**
+	 * Class constructor. Note that this constructor dosn't take any parameter
+	 * because initializes a non-Windows port
+	 * 
+	 * @param listener the goal listener
+	 * @see #Serial(String, GoalListener)
+	 */
+	public Serial(GoalListener listener) {
+		this("0", listener);
+	}
+
+	/**
+	 * Class constructor.
+	 * 
+	 * @param ncom     the ncom port
+	 * @param listener the {@link GoalListener} object
+	 * @see #Serial(GoalListener)
+	 */
+	public Serial(String ncom, GoalListener listener) {
+		this.listener = listener;
+		if (Integer.parseInt(ncom) >= 3 && Integer.parseInt(ncom) <= 9)
+			PORT_NAMES[2] = "COM" + ncom;
+		System.out.println("Serial Comms Started");
+	}
+
+	/**
+	 * Initialize the serial communication
+	 */
 	public void initialize() {
 		CommPortIdentifier portId = null;
 		Enumeration<?> portEnum = CommPortIdentifier.getPortIdentifiers();
@@ -77,6 +126,7 @@ public class Serial implements SerialPortEventListener {
 		}
 	}
 
+	@Override
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
@@ -95,20 +145,18 @@ public class Serial implements SerialPortEventListener {
 		if (serialPort != null) {
 			serialPort.removeEventListener();
 			serialPort.close();
+			try {
+				input.close();
+			} catch (IOException e) {
+			}
 		}
 	}
 
-	public Serial(GoalListener listener) {
-		this("0", listener);
-	}
-
-	public Serial(String ncom, GoalListener listener) {
-		this.listener = listener;
-		if (Integer.parseInt(ncom) >= 3 && Integer.parseInt(ncom) <= 9)
-			PORT_NAMES[2] = "COM" + ncom;
-		System.out.println("Serial Comms Started");
-	}
-
+	/**
+	 * Assign the score to the correct team.
+	 * 
+	 * @param s the string received from Arduino board
+	 */
 	private void assignPoint(String s) {
 		if (s.contains("-1"))
 			return;
@@ -118,16 +166,18 @@ public class Serial implements SerialPortEventListener {
 			point2 = Integer.parseInt(s.substring(1, s.length()));
 	}
 
+	/**
+	 * @return team one's score
+	 */
 	public int getTeamOneScore() {
 		return point1;
 	}
 
+	/**
+	 * @return team's two score.
+	 */
 	public int getTeamTwoScore() {
 		return point2;
-	}
-
-	public BufferedReader getInput() {
-		return input;
 	}
 
 }

@@ -13,8 +13,8 @@ import io.ghostyjade.utils.Constants;
  * a match.
  * 
  * @author GhostyJade
- * @author Zaffino
  * @author taglioIsCoding
+ * @author Zaffino
  */
 public class MathUtil {
 

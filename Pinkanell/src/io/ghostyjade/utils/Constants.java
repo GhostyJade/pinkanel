@@ -8,8 +8,14 @@ import java.util.Properties;
  * @author GhostyJade
  */
 public class Constants {
-	
+
+	/**
+	 * The minimum circle radius, used by ball detection
+	 */
 	public static final int MIN_CIRCLE_RADIUS = 1;
+	/**
+	 * The maximum circle radius, used by ball detection
+	 */
 	public static final int MAX_CIRCLE_RADIUS = 30;
 
 	/**
@@ -31,7 +37,11 @@ public class Constants {
 	 */
 	public static double CONST_FIELD;
 
-	public static double FIELD_HEIGHT_DOTS; //TODO set
+	/**
+	 * A value that represent the proportion between the real dimension and the
+	 * camera's dimension.
+	 */
+	public static double FIELD_HEIGHT_DOTS; // TODO set
 
 	/**
 	 * Initializes the fields with some values.
@@ -48,8 +58,8 @@ public class Constants {
 	 *         the scaled field.
 	 */
 	public static void calculateConstFiled() {
-		CONST_FIELD =1;//= FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
-	}	
+		CONST_FIELD = 1;// = FIELD_HEIGHT / FIELD_HEIGHT_DOTS;
+	}
 
 	/**
 	 * Initialize the class field using the specified properties.
@@ -61,7 +71,5 @@ public class Constants {
 		FIELD_HEIGHT = Integer.parseInt(p.getProperty("fieldHeight", "0"));
 		LOCALE_NAME = p.getProperty("locale", "it_IT");
 	}
-	
+
 }
-
-
