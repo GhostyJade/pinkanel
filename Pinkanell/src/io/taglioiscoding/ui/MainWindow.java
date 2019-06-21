@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import org.bytedeco.opencv.opencv_core.Point;
@@ -187,7 +188,7 @@ public class MainWindow {
 		heatmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
 		heatmapPanel.setBounds(0, 0, ((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - 10), 640);
 
-		lblVmax.setBounds(61, 654, 358, 72);
+		lblVmax.setBounds(61, 654, 358, 72); 
 		valueVmed.setBounds(445, 750, 193, 96);
 		lblVmed.setBounds(61, 767, 358, 62);
 		valueVmax.setBounds(445, 654, 185, 72);
@@ -226,6 +227,13 @@ public class MainWindow {
 		goal.setBorder(new LineBorder(Color.RED, 3));
 		frame.getContentPane().add(goal);
 	}
+	
+	public void changeToWinScreen() {	
+		JLabel lblHaiVinto = new JLabel("Hai Vinto!");
+		lblHaiVinto.setBounds(169, 130, 67, 16);
+		frame.getContentPane().add(lblHaiVinto);
+		System.exit(0);
+	}
 
 	/**
 	 * Show the window.
@@ -255,6 +263,8 @@ public class MainWindow {
 		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
 		valueVmax.setText(String.valueOf(PinkanellMain.getMath().getMaxSpeed()));
 		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
+		if (points1.getText().contentEquals("10") && points2.getText().contentEquals("10"))
+			changeToWinScreen();
 	}
 
 	public JFrame getJFrame() {
