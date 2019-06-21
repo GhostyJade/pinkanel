@@ -231,8 +231,11 @@ public class MainWindow {
 		JPanel panelw = new JPanel();
 		panelw.setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		JLabel lblHaiVinto = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.win"));
+		lblHaiVinto.setFont(new Font("Lucida Grande", Font.PLAIN, 150));
 		lblHaiVinto.setBounds(169, 130, 67, 16);
 		panelw.add(lblHaiVinto);
+		lblHaiVinto.setVerticalAlignment(SwingConstants.CENTER);
+		lblHaiVinto.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.setContentPane(panelw);
 		//System.exit(0);
 	}
