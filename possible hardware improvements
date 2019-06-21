@@ -4,16 +4,150 @@ you will be able to have more detail in the images for easier detection of the b
 you to have more chances to detect the ball in a unit of time. All this will increase the accuracy of the ball detection, therefore the 
 calculation of the maximum/average speed.
 - computer: a higher performance camera will give in output an enormous amount of data, which a normal Raspberry would not be able to 
-process. The best would be a good computer with good processing capacity. In the best case, the processor may have to analyze 200 frames
+process. The best would be a good computer with good process
+ing capacity. In the best case, the processor may have to analyze 200 frames
 in FullHD + per second, having to start 4 different threads: camera, ball recognition, serial and rendering. All this requires a good 
 computer.
 - Campo: migliorare le circostanze aiuterebbe di molto la 
-telecamera e l'elaboratore; l'ideale potrebbe essere un campo nero con una pallina gialla, 
+telecamera e l'elaboratore; l'id
+eale potrebbe essere un campo nero con una pallina gialla, 
 così da renderla perfettamente visibile alla telecamera. Il pincanello potrebbe avere un alloggio 
-per l'unità elaboratrice alla sua base, con un display per il settaggio delle impostazioni e del programma. 
-Una struttura in metallo è necessaria per l'alloggiamento della telecamera in alto. A suo supporto potrebbe essere 
+per l'unità elabor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+atrice all
+a sua base, con un display pe
+r il settaggio delle impostazioni e del programma. 
+Una struttura in metallo è necessa
+
+ria per l'alloggiamento della telecamera in alto. A suo supporto potrebbe essere 
 installata una plafoniera con luci a led e superficie opaca così da evitare riflessioni, in questo modo si 
-potrà assicurare un'ottima illuminazione sempre. Il campo del pincanello stesso converrebbe esser opaco per evitare 
+potrà assicurare un'ottima illumi
+
+nazione sempre. Il campo del pincanello stesso converrebbe esser opaco per evitare 
 riflessioni. Conveniente potrebbe essere l'acquisto di un pincanello senza oggetti di forma circolare simile a quella 
 della pallina per evitare il loro rilevamento. Devono essere contemplati anche i due alloggi alla base delle due porte
 per i sensori ad ultrasuoni che dovranno essere collegati all'arduino, esso collegato all'elaboratore: il pincanello dovrà 
