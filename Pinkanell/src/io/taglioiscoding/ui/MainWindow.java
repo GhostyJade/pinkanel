@@ -228,13 +228,17 @@ public class MainWindow {
 	}
 	
 	public void changeToWinScreen() {	
+		JPanel panelw = new JPanel();
+		panelw.setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		JLabel lblHaiVinto = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.win"));
 		lblHaiVinto.setBounds(169, 130, 67, 16);
-		frame.getContentPane().add(lblHaiVinto);
-		System.exit(0);
+		panelw.add(lblHaiVinto);
+		frame.setContentPane(panelw);
+		//System.exit(0);
 	}
 
 	/**
+	 * 
 	 * Show the window.
 	 * 
 	 * @author GhostyJade
@@ -262,11 +266,11 @@ public class MainWindow {
 		points2.setText(String.valueOf(PinkanellMain.getSerial().getTeamTwoScore()));
 		valueVmax.setText(String.valueOf(PinkanellMain.getMath().getMaxSpeed()));
 		valueVmed.setText(String.valueOf(PinkanellMain.getMath().getAverageSpeed()));
-		if (points1.getText().contentEquals("10") && points2.getText().contentEquals("10"))
+		if (PinkanellMain.getSerial().getTeamOneScore() == 10 || PinkanellMain.getSerial().getTeamTwoScore() == 10)
 			changeToWinScreen();
 	}
 
-	public JFrame getJFrame() {
+	public JFrame getJFrame() { 
 		return frame;
 	}
 
