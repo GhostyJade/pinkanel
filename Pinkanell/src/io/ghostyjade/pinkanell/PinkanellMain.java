@@ -81,8 +81,8 @@ public class PinkanellMain {
 	 */
 	private void createThreads() {
 		manager.start();
-		serial.initialize();
 		window.create();
+		serial.initialize();
 		manager.postInit();
 	}
 

@@ -14,28 +14,26 @@ public class HeatMap extends Canvas implements Runnable {
 
 	private int width, height;
 
+	private int scale = 3;
+
 	private BufferedImage image;
 	private int[] pixels;
 
 	private Renderer renderer;
 
-	public HeatMap(int width, int height) {
-		this.width = width / 3;
-		this.height = height / 3;
-		image = new BufferedImage(width/3, height/3, BufferedImage.TYPE_INT_RGB);
-		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-		renderer = new Renderer(width / 3, height / 3);
-	}
-
 	public HeatMap(Dimension d) {
-		this(d.width, d.height);
+		this.width = d.width;
+		this.height = d.height;
+		image = new BufferedImage(width / scale, height / scale, BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+		renderer = new Renderer(width / scale, height / scale);
 		setPreferredSize(d);
 		setMaximumSize(d);
 		setMinimumSize(d);
 	}
 
 	public void setPoint(Point p) {
-		renderer.setPoint(p.x()/3, p.y()/3);//FIXME
+		renderer.setPoint(p.x() / scale, p.y() / scale);// FIXME
 	}
 
 	public void render() {
@@ -48,7 +46,7 @@ public class HeatMap extends Canvas implements Runnable {
 			pixels[i] = renderer.pixels[i];
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(image, 0, 0, width * scale, height * scale, null);
 		g.dispose();
 		bs.show();
 	}

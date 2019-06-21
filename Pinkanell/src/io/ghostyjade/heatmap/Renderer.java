@@ -14,9 +14,7 @@ public class Renderer {
 
 	public int getColor(int x, int y) {
 		if (x < 0 || y < 0 || x > width || y > height)
-			return 0;
-		// throw new IndexOutOfBoundsException("The value (" + x + "; " + y + ") is not
-		// in range.");
+			throw new IndexOutOfBoundsException("The value (" + x + "; " + y + ") is not in range.");
 		return pixels[x + y * width];
 	}
 
@@ -30,8 +28,12 @@ public class Renderer {
 		int red = ((srcColor >> 16) & 0xFF);
 		int green = ((srcColor >> 8) & 0xFF);
 		int blue = ((srcColor >> 0) & 0xFF);
-		if ((red == green) && red < 255 || green < 255) {
+		if ((red == green) && (red < 255 || green < 255)) {
 			red = green = (red + VALUE);
+		} else {
+			if (green > 0) {
+				green -= VALUE;
+			}
 		}
 		return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 0);
 	}
@@ -40,9 +42,7 @@ public class Renderer {
 
 	public void setPixel(int x, int y, int color) {
 		if (x < 0 || y < 0 || x > width || y > height)
-			return;
-		// throw new IndexOutOfBoundsException("The value (" + x + "; " + y + ") is not
-		// in range.");
+			throw new IndexOutOfBoundsException("The value (" + x + "; " + y + ") is not in range.");
 		pixels[x + y * width] = color;
 	}
 
@@ -55,7 +55,13 @@ public class Renderer {
 	}
 
 	public void setPoint(int x, int y) {
-		setPixel(x, y, getColor(x, y));
+		setPixel(x, y, calculateColor(x, y));
+	}
+
+	public void clear() {
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = 0;
+		}
 	}
 
 }
