@@ -70,11 +70,6 @@ public class MainWindow {
 				Toolkit.getDefaultToolkit().getScreenSize().height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addKeyListener(closeWindow());
-		heatmapPanel = new JPanel();
-		heatmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
-		heatmapPanel.setBounds(6, 30, 826, 592);
-		map = new HeatMap(heatmapPanel.getSize());
-		heatmapPanel.add(map);
 
 		lblVmax = new JLabel(PinkanellMain.getI18n().getTranslationString("ui.maxspeed"));
 		lblVmax.setFont(lucidaGrande40);
@@ -109,6 +104,12 @@ public class MainWindow {
 		points2.setBounds(731, 630, 206, 236);
 		points2.setHorizontalAlignment(SwingConstants.CENTER);
 		points2.setFont(new Font("Lucida Grande", Font.PLAIN, 99));
+		
+		heatmapPanel = new JPanel();
+		heatmapPanel.setBorder(new LineBorder(Color.ORANGE, 3));
+		heatmapPanel.setBounds(6, 30, 826, 592);
+		map = new HeatMap(PinkanellMain.getCVManager().getCameraDimension(), heatmapPanel.getSize());
+		heatmapPanel.add(map);
 
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(heatmapPanel);

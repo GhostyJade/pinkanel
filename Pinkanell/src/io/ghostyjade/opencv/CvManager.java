@@ -1,6 +1,7 @@
 package io.ghostyjade.opencv;
 
 import java.awt.Container;
+import java.awt.Dimension;
 
 import javax.swing.WindowConstants;
 
@@ -136,6 +137,10 @@ public class CvManager {
 	 */
 	public Container getCameraPane() {
 		return frame.getContentPane();
+	}
+
+	public Dimension getCameraDimension() {
+		return new Dimension(cameraInstance.getCameraWidth(), cameraInstance.getCameraHeight());
 	}
 
 }

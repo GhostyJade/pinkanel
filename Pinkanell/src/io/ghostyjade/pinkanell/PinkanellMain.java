@@ -57,9 +57,9 @@ public class PinkanellMain {
 		Settings.loadSettingsFromFile("pinkanell.properties");
 		Settings.initConstants();
 		i18n = new I18n(Constants.LOCALE_NAME);
+		manager = new CvManager();
 		window = new MainWindow();
 		math = new MathUtil();
-		manager = new CvManager();
 		manager.init();
 
 		serial = new Serial(new GoalListener() {
