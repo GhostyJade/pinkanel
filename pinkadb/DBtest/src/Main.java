@@ -7,10 +7,6 @@ import java.util.Calendar;
 import java.util.Random;
 //import com.mysql.cj.jdbc.Driver;
 
-
-
-
-
 public class Main {
         
 public static Connection conn;
@@ -53,11 +49,12 @@ public static Connection conn;
     java.util.Date date = new java.util.Date();
     java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
   
-    String query1 = " insert into databank ( game_id, x, y, time)"
+    /*________________________________________________________________________________________
+     String query1 = " insert into databank ( game_id, x, y, time)"
     	      + " values ( ?, ?, ?, ?)";
     	    
     	    PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
-    	    //preparedStmt1.setInt (1, 0);
+
     	    preparedStmt1.setInt   (1, 1);
     	    preparedStmt1.setInt   (2, 5);
     	    preparedStmt1.setInt    (3, 7);
@@ -71,7 +68,7 @@ public static Connection conn;
     int randomInt = randomGenerator.nextInt(50) + 1;
     
     PreparedStatement preparedStmt = conn.prepareStatement(query);
-    //preparedStmt.setInt (1, 0);
+
     preparedStmt.setTimestamp   (1, timestamp);
     preparedStmt.setTimestamp   (2, timestamp);
     preparedStmt.setInt    (3, randomInt);
@@ -79,8 +76,18 @@ public static Connection conn;
 
 
     // execute the preparedstatement
+    
     preparedStmt1.execute();
     preparedStmt.execute();
+    _______________________________________________________________________________________________*/
+    
+    /*_____________________________________________________________________
+    String query2 = "update games set points_p1 = ? where game_id = ?";
+    PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+    preparedStmt2.setInt(1, 6);
+    preparedStmt2.setInt(2, 8);
+    preparedStmt2.execute();
+    ________________________________________________________________________*/
     System.out.println("Inserted data");
     conn.close();
     System.out.println("Connection closed");
