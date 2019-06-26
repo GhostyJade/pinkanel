@@ -39,49 +39,40 @@ public class Pinkadb {
 
 	public static void insertData() throws SQLException {
 
-		Calendar calendar = Calendar.getInstance();
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 
-		/*
-		 * ________________________________________________________________________________________
-		 * String query1 = " insert into databank ( game_id, x, y, time)" +
-		 * " values ( ?, ?, ?, ?)";
-		 * 
-		 * PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
-		 * 
-		 * preparedStmt1.setInt (1, 1); preparedStmt1.setInt (2, 5);
-		 * preparedStmt1.setInt (3, 7); preparedStmt1.setTimestamp (4, timestamp);
-		 * 
-		 * 
-		 * String query =
-		 * " insert into games ( start_time, end_time, points_p1, points_p2)" +
-		 * " values ( ?, ?, ?, ?)";
-		 * 
-		 * Random randomGenerator = new Random(); int randomInt =
-		 * randomGenerator.nextInt(50) + 1;
-		 * 
-		 * PreparedStatement preparedStmt = conn.prepareStatement(query);
-		 * 
-		 * preparedStmt.setTimestamp (1, timestamp); preparedStmt.setTimestamp (2,
-		 * timestamp); preparedStmt.setInt (3, randomInt); preparedStmt.setInt (4,
-		 * randomInt);
-		 * 
-		 * 
-		 * // execute the preparedstatement
-		 * 
-		 * preparedStmt1.execute(); preparedStmt.execute();
-		 * _______________________________________________________________________________________________
-		 */
+		 String query1 = " insert into databank ( game_id, x, y, time)" + " values ( ?, ?, ?, ?)";
+	
+		 java.sql.PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
+		 
+		 preparedStmt1.setInt (1, 1); preparedStmt1.setInt (2, 5);
+		 preparedStmt1.setInt (3, 7); preparedStmt1.setTimestamp (4, timestamp);
+		 
+		 String query = " insert into games ( start_time, end_time, points_p1, points_p2)" + " values ( ?, ?, ?, ?)";
+		
+		 java.util.Random randomGenerator = new java.util.Random(); int randomInt =
+		 randomGenerator.nextInt(50) + 1;
+		 
+		 java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		 
+		 preparedStmt.setTimestamp (1, timestamp); preparedStmt.setTimestamp (2,
+		 timestamp); preparedStmt.setInt (3, randomInt); preparedStmt.setInt (4,
+		 randomInt);
+		 
+		 
+		 // execute the preparedstatement
+		 
+		 preparedStmt1.execute(); preparedStmt.execute();
+		 
 
-		/*
-		 * _____________________________________________________________________ String
-		 * query2 = "update games set points_p1 = ? where game_id = ?";
-		 * PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
-		 * preparedStmt2.setInt(1, 6); preparedStmt2.setInt(2, 8);
-		 * preparedStmt2.execute();
-		 * ________________________________________________________________________
-		 */
+		 String query2 = "update games set points_p1 = ? where game_id = ?";
+		 java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+		 preparedStmt2.setInt(1, 6); preparedStmt2.setInt(2, 8);
+		 preparedStmt2.execute();
+
+		 
+
 		System.out.println("Inserted data");
 		conn.close();
 		System.out.println("Connection closed");
