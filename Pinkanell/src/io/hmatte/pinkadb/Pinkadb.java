@@ -3,7 +3,6 @@ package io.hmatte.pinkadb;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 public class Pinkadb {
 
