@@ -100,7 +100,7 @@ public class CameraFramer extends Thread {
 	 * it return 0.
 	 * 
 	 * @return the camera height
-	 */
+	 */ 
 	public int getCameraHeight() {
 		try {
 			return (int) grabber.get(CAP_PROP_FRAME_HEIGHT);
