@@ -71,7 +71,7 @@ public class Pinkadb {
 	}
 
 	public static void insertPoint(int x, int y) throws SQLException {
-<<<<<<< HEAD
+
 		String query = " insert into dataBank (game_id, X, Y)" + " values (?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -81,18 +81,6 @@ public class Pinkadb {
 		preparedStmt.setInt(3, y);
 		
 		preparedStmt.execute();
-		
-=======
-		String query = " insert into dataBank (game_id, X, Y)" + " values (?,?, ?)";
-
-		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
-		preparedStmt.setInt(1, Constants.GAME_ID);
-		preparedStmt.setInt(2, x);
-		preparedStmt.setInt(3, y);
-
-		preparedStmt.execute();
-
->>>>>>> 1d1b47a36f215ec35dd604d6bb58e15a1188baae
 		System.out.println("Added a point");
 	}
 }
