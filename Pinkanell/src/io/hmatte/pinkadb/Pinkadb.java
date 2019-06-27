@@ -71,6 +71,7 @@ public class Pinkadb {
 	}
 
 	public static void insertPoint(int x, int y) throws SQLException {
+
 		String query = " insert into dataBank (game_id, X, Y)" + " values (?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -80,8 +81,6 @@ public class Pinkadb {
 		preparedStmt.setInt(3, y);
 		
 		preparedStmt.execute();
-		
-		
 
 		System.out.println("Added a point");
 	}

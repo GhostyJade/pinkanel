@@ -14,6 +14,13 @@ import org.bytedeco.opencv.opencv_videoio.VideoCapture;
 public class CameraFramer extends Thread {
 
 	/**
+	 * The camera id. If 0, uses an internal camera (if is attached), if 1, uses an
+	 * external camera. Note that if the specified value isn't valid throws an
+	 * exception.
+	 */
+	private final int CAMERA_ID = 0;
+
+	/**
 	 * The {@link VideoCapture}. Grab frames from camera.
 	 */
 	private VideoCapture grabber;
@@ -28,14 +35,14 @@ public class CameraFramer extends Thread {
 	 */
 	public CameraFramer() {
 		currentFrame = new Mat();
-		grabber = new VideoCapture(1);
+		grabber = new VideoCapture(CAMERA_ID);
 	}
 
 	/**
 	 * Open the camera acquisition.
 	 */
 	public void init() {
-		grabber.open(1);
+		grabber.open(CAMERA_ID);
 	}
 
 	/**
@@ -71,17 +78,35 @@ public class CameraFramer extends Thread {
 	}
 
 	/**
+	 * Get the camera width. If the camera is not initialized or something happens,
+	 * it return 0.
+	 * 
 	 * @return the camera width
 	 */
 	public int getCameraWidth() {
-		return (int) grabber.get(CAP_PROP_FRAME_WIDTH);
+		try {
+			return (int) grabber.get(CAP_PROP_FRAME_WIDTH);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
+	// Sappiate che se il valore è 0, la heatmap diventa inutile perchè viene
+	// generata come 0 (o ritorna un eccezione, non so come gestisca bufferedimage
+	// con dimensioni 0,0)
+
 	/**
+	 * Get the camera height. If the camera is not initialized or something happens,
+	 * it return 0.
+	 * 
 	 * @return the camera height
 	 */
 	public int getCameraHeight() {
-		return (int) grabber.get(CAP_PROP_FRAME_HEIGHT);
+		try {
+			return (int) grabber.get(CAP_PROP_FRAME_HEIGHT);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 }

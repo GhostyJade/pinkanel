@@ -55,7 +55,7 @@ public class BallRecognizer implements Runnable {
 	 * Is this rendering?
 	 */
 	private boolean rendering = false;
-
+     
 	/**
 	 * Class constructor.
 	 * 
@@ -91,7 +91,7 @@ public class BallRecognizer implements Runnable {
 				// TODO move to BallRecognizer
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
-				Pinkadb.insertPoint(p.x(), p.y());
+				Pinkadb.insertPoint(p.x(), p.y());		
 			}
 		}
 	}
