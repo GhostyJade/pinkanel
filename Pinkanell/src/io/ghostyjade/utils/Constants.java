@@ -44,6 +44,13 @@ public class Constants {
 	public static double FIELD_HEIGHT_DOTS; // TODO set
 
 	/**
+	 * 
+	 * The game_id on our db
+	 */
+	public static int GAME_ID;
+	
+	
+	/**
 	 * Initializes the fields with some values.
 	 */
 	static {

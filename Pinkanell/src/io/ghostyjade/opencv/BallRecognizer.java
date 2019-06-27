@@ -7,6 +7,7 @@ import static org.bytedeco.opencv.global.opencv_imgproc.circle;
 import static org.bytedeco.opencv.global.opencv_imgproc.cvtColor;
 import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -18,6 +19,7 @@ import org.bytedeco.opencv.opencv_imgproc.Vec3fVector;
 
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.Constants;
+import io.hmatte.pinkadb.Pinkadb;
 
 /**
  * This class provides methods to recognize a ball from a Webcam stream.
@@ -66,8 +68,9 @@ public class BallRecognizer implements Runnable {
 
 	/**
 	 * Try to recognize all the circle present in the grabbed frame.
+	 * @throws SQLException 
 	 */
-	public void recognizeBall() {
+	public void recognizeBall() throws SQLException {
 		points.clear();
 		Mat gray = new Mat();
 		cvtColor(cameraInstance.getCurrentFrame(), gray, COLOR_BGR2GRAY);
@@ -88,6 +91,7 @@ public class BallRecognizer implements Runnable {
 				// TODO move to BallRecognizer
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
+				Pinkadb.insertPoint(p.x(), p.y());
 			}
 		}
 	}
@@ -98,7 +102,11 @@ public class BallRecognizer implements Runnable {
 	@Override
 	public void run() {
 		while (running) {
-			recognizeBall();
+			try {
+				recognizeBall();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			if (rendering)
 				render();
 		}
