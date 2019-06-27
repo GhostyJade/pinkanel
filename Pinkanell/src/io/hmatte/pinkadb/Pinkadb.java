@@ -22,7 +22,7 @@ public class Pinkadb {
 			// broken Java implementations
 			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
-			String username = "root";
+			String username = "pinkanell";
 			String password = "toor";
 			Class.forName(driver);
 
