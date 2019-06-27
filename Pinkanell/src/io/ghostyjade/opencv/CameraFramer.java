@@ -28,14 +28,14 @@ public class CameraFramer extends Thread {
 	 */
 	public CameraFramer() {
 		currentFrame = new Mat();
-		grabber = new VideoCapture(0);
+		grabber = new VideoCapture(1);
 	}
 
 	/**
 	 * Open the camera acquisition.
 	 */
 	public void init() {
-		grabber.open(0);
+		grabber.open(1);
 	}
 
 	/**

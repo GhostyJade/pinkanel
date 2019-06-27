@@ -50,14 +50,13 @@ public class PinkanellMain {
 	 * Pool of threads, used to create new program's threads.
 	 */
 	public static ExecutorService serviceExecutor = Executors.newCachedThreadPool();
-	
+
 	/**
 	 * 
 	 * The Pinkadb class instance
 	 */
 	public static Pinkadb pinkadb;
-	
-	
+
 	/**
 	 * The constructor, initialize all the components.
 	 */
@@ -69,8 +68,8 @@ public class PinkanellMain {
 		window = new MainWindow();
 		math = new MathUtil();
 		manager.init();
-		pinkadb=new Pinkadb();
-		
+		pinkadb = new Pinkadb();
+
 		try {
 			pinkadb.getConnection();
 		} catch (Exception e) {
@@ -106,9 +105,7 @@ public class PinkanellMain {
 	 * @param args the program arguments (unused in our application)
 	 */
 	public static void main(String[] args) {
-		System.loadLibrary("rxtxSerial");
 		new PinkanellMain();
-		
 	}
 
 	/**
@@ -153,12 +150,12 @@ public class PinkanellMain {
 	public static CvManager getCVManager() {
 		return manager;
 	}
-	
+
 	/*
 	 * 
-	 * @return the pinkadb 
+	 * @return the pinkadb
 	 */
-	
+
 	public static Pinkadb getPinkadb() {
 		return pinkadb;
 	}
