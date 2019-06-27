@@ -29,7 +29,8 @@ public class Pinkadb {
 			conn = (Connection) DriverManager.getConnection(url, username, password);
 			System.out.println("Connected");
 
-			insertNewGame(0, 0);
+			// insertNewGame(0,0);
+			insertData(0, 0);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -38,7 +39,7 @@ public class Pinkadb {
 		return null;
 	}
 
-	private static int insertNewGame(int i, int e) throws SQLException {
+	public static int insertData(int i, int e) throws SQLException {
 
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
@@ -55,6 +56,20 @@ public class Pinkadb {
 		preparedStmt.execute();
 
 		String queryR = "SELECT * FROM pinkadb.games order by game_id desc Limit 1;";
+
+		/*
+		 * String query2 = "update games set points_p1 = ? where game_id = ?";
+		 * java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+		 * preparedStmt2.setInt(1, i); preparedStmt2.setInt(2, e);
+		 * preparedStmt2.execute();
+		 * 
+		 * 
+		 * 
+		 * System.out.println("Inserted data");
+		 * 
+		 * conn.close(); System.out.println("Connection closed");
+		 */
+
 		Statement st = conn.createStatement();
 		st.execute(queryR);
 		ResultSet rs = st.executeQuery(queryR);
@@ -65,6 +80,7 @@ public class Pinkadb {
 		int gameId = rs.getInt("game_id");
 
 		Constants.GAME_ID = gameId;
+
 		System.out.println(gameId);
 		System.out.println(foundType);
 		return gameId;
@@ -84,4 +100,36 @@ public class Pinkadb {
 
 		System.out.println("Added a point");
 	}
+
 }
+/*
+ * public static int insertNewGame(int score1, int score2 ) throws SQLException
+ * {
+ * 
+ * 
+ * java.util.Date date = new java.util.Date(); java.sql.Timestamp timestamp =
+ * new java.sql.Timestamp(date.getTime());
+ * 
+ * String query =
+ * " insert into games ( start_time, end_time, points_p1, points_p2)" +
+ * " values ( ?, ?, ?, ?)";
+ * 
+ * java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+ * 
+ * preparedStmt.setTimestamp (1, timestamp); preparedStmt.setTimestamp (2,
+ * timestamp); preparedStmt.setInt (3, score1); preparedStmt.setInt (4, score1);
+ * 
+ * 
+ * preparedStmt.execute();
+ * 
+ * String queryR =
+ * "SELECT game_id FROM mydb.games order by game_id desc Limit 1;";
+ * java.sql.PreparedStatement preparedStmtR = conn.prepareStatement(queryR); int
+ * rs = preparedStmtR.executeUpdate(query); //int gameId = rs.getInt("game_id");
+ * 
+ * System.out.println(rs);
+ * 
+ * return rs;
+ * 
+ * }
+ */

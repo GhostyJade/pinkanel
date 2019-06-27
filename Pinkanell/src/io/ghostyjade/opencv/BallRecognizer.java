@@ -68,9 +68,8 @@ public class BallRecognizer implements Runnable {
 
 	/**
 	 * Try to recognize all the circle present in the grabbed frame.
-	 * @throws SQLException 
 	 */
-	public void recognizeBall() throws SQLException {
+	public void recognizeBall() {
 		points.clear();
 		Mat gray = new Mat();
 		cvtColor(cameraInstance.getCurrentFrame(), gray, COLOR_BGR2GRAY);
@@ -91,7 +90,11 @@ public class BallRecognizer implements Runnable {
 				// TODO move to BallRecognizer
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
-				Pinkadb.insertPoint(p.x(), p.y());		
+				try {
+					Pinkadb.insertPoint(p.x(), p.y());
+				} catch (SQLException e) {
+					//e.printStackTrace();
+				}		
 			}
 		}
 	}
@@ -102,11 +105,7 @@ public class BallRecognizer implements Runnable {
 	@Override
 	public void run() {
 		while (running) {
-			try {
-				recognizeBall();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			recognizeBall();
 			if (rendering)
 				render();
 		}
