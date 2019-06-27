@@ -2,7 +2,9 @@ package io.hmatte.pinkadb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Pinkadb {
 
@@ -11,8 +13,6 @@ public class Pinkadb {
 	public Pinkadb() {
 		
 	}
-
-	
 
 	public static Connection getConnection() throws Exception {
 		try {
@@ -27,8 +27,9 @@ public class Pinkadb {
 			conn = (Connection) DriverManager.getConnection(url, username, password);
 			System.out.println("Connected");
 
-			//insertData();
-
+			//insertNewGame(0,0);
+			insertData(0,0);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 			// handle the error
@@ -36,45 +37,85 @@ public class Pinkadb {
 		return null;
 	}
 
-	public static void insertData() throws SQLException {
+	public static int insertData(int i, int e) throws SQLException {
 
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
-
-		 String query1 = " insert into databank ( game_id, x, y, time)" + " values ( ?, ?, ?, ?)";
-	
-		 java.sql.PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
-		 
-		 preparedStmt1.setInt (1, 1); preparedStmt1.setInt (2, 5);
-		 preparedStmt1.setInt (3, 7); preparedStmt1.setTimestamp (4, timestamp);
-		 
+		
+		
 		 String query = " insert into games ( start_time, end_time, points_p1, points_p2)" + " values ( ?, ?, ?, ?)";
 		
-		 java.util.Random randomGenerator = new java.util.Random(); int randomInt =
-		 randomGenerator.nextInt(50) + 1;
+		 
 		 
 		 java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
 		 
 		 preparedStmt.setTimestamp (1, timestamp); preparedStmt.setTimestamp (2,
-		 timestamp); preparedStmt.setInt (3, randomInt); preparedStmt.setInt (4,
-		 randomInt);
+		 timestamp); preparedStmt.setInt (3, i); preparedStmt.setInt (4,
+		 e);
 		 
 		 
 		 // execute the preparedstatement
 		 
-		 preparedStmt1.execute(); preparedStmt.execute();
 		 
-
+		 preparedStmt.execute();
+		 
+/*
 		 String query2 = "update games set points_p1 = ? where game_id = ?";
 		 java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
-		 preparedStmt2.setInt(1, 6); preparedStmt2.setInt(2, 8);
+		 preparedStmt2.setInt(1, i); preparedStmt2.setInt(2, e);
 		 preparedStmt2.execute();
 
 		 
 
 		System.out.println("Inserted data");
+		
 		conn.close();
 		System.out.println("Connection closed");
+		*/
+		String queryR = "SELECT * FROM mydb.games order by game_id desc Limit 1;";
+		Statement st = conn.createStatement();
+		st.execute(queryR);
+		ResultSet rs = st.executeQuery(queryR);
+		
+		rs.next();
+		String foundType = rs.getString(1);
+		
+		int gameId = rs.getInt("game_id");
+		
+		
+		
+		System.out.println(gameId);
+		System.out.println(foundType);
+		return gameId;
 	}
-
+	
 }
+	/*
+	public static int insertNewGame(int score1, int score2 ) throws SQLException {
+		
+		
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+		
+		String query = " insert into games ( start_time, end_time, points_p1, points_p2)" + " values ( ?, ?, ?, ?)";
+		
+		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		
+		preparedStmt.setTimestamp (1, timestamp); preparedStmt.setTimestamp (2,
+				 timestamp); preparedStmt.setInt (3, score1); preparedStmt.setInt (4,
+				 score1);
+	 
+				 
+		preparedStmt.execute();		 
+				 
+		String queryR = "SELECT game_id FROM mydb.games order by game_id desc Limit 1;";
+		java.sql.PreparedStatement preparedStmtR = conn.prepareStatement(queryR);
+		int rs = preparedStmtR.executeUpdate(query);
+		//int gameId = rs.getInt("game_id");
+		
+		System.out.println(rs);
+		
+		return rs;
+		
+	}
+	*/
