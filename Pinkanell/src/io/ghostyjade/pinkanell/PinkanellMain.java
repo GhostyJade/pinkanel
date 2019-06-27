@@ -8,6 +8,7 @@ import io.ghostyjade.utils.Constants;
 import io.ghostyjade.utils.I18n;
 import io.ghostyjade.utils.Settings;
 import io.ghostyjade.utils.listener.GoalListener;
+import io.hmatte.pinkadb.Pinkadb;
 import io.taglioiscoding.ui.MainWindow;
 import io.zaffino.math.MathUtil;
 import io.zamp.serial.Serial;
@@ -49,7 +50,14 @@ public class PinkanellMain {
 	 * Pool of threads, used to create new program's threads.
 	 */
 	public static ExecutorService serviceExecutor = Executors.newCachedThreadPool();
-
+	
+	/**
+	 * 
+	 * The Pinkadb class instance
+	 */
+	public static Pinkadb pinkadb;
+	
+	
 	/**
 	 * The constructor, initialize all the components.
 	 */
@@ -61,6 +69,14 @@ public class PinkanellMain {
 		window = new MainWindow();
 		math = new MathUtil();
 		manager.init();
+		pinkadb=new Pinkadb();
+		
+		try {
+			pinkadb.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
 
 		serial = new Serial(new GoalListener() {
 
@@ -92,6 +108,7 @@ public class PinkanellMain {
 	public static void main(String[] args) {
 		System.loadLibrary("rxtxSerial");
 		new PinkanellMain();
+		
 	}
 
 	/**
@@ -135,6 +152,15 @@ public class PinkanellMain {
 	 */
 	public static CvManager getCVManager() {
 		return manager;
+	}
+	
+	/*
+	 * 
+	 * @return the pinkadb 
+	 */
+	
+	public static Pinkadb getPinkadb() {
+		return pinkadb;
 	}
 
 }

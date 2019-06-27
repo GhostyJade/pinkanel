@@ -7,27 +7,27 @@ import java.sql.SQLException;
 public class Pinkadb {
 
 	public static Connection conn;
-
-	public static void main(String[] args) throws Exception {
-
-		getConnection();
-
+	
+	public Pinkadb() {
+		
 	}
+
+	
 
 	public static Connection getConnection() throws Exception {
 		try {
 			// The newInstance() call is a work around for some
 			// broken Java implementations
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
-			String username = "root";
-			String password = "toor";
-			Class.forName(driver);
+			   String url = "jdbc:mysql://127.0.0.1:3306/mydb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
+			   String username = "pinkanell";
+			   String password = "toor";
+			   Class.forName(driver);
 
 			conn = (Connection) DriverManager.getConnection(url, username, password);
 			System.out.println("Connected");
 
-			insertData();
+			//insertData();
 
 		} catch (Exception e) {
 			System.out.println(e);
