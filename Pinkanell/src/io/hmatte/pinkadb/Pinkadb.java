@@ -21,11 +21,12 @@ public class Pinkadb {
 			// The newInstance() call is a work around for some
 			// broken Java implementations
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
+			String url = "jdbc:mysql://127.0.0.1:3306/pinkanell?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
 			String username = "pinkanell";
 			String password = "toor";
 			Class.forName(driver);
-
+			//l'accesso al db provo una cosa
+			//ORA ERRORI NON NE DA APPENA SCHIACCIO P PER LA FOTOCAMERA PARTONO GLI ERRORI
 			conn = (Connection) DriverManager.getConnection(url, username, password);
 			System.out.println("Connected");
 
@@ -55,7 +56,7 @@ public class Pinkadb {
 
 		preparedStmt.execute();
 
-		String queryR = "SELECT * FROM pinkadb.games order by game_id desc Limit 1;";
+		String queryR = "SELECT * FROM localP.games order by game_id desc Limit 1;";
 
 		/*
 		 * String query2 = "update games set points_p1 = ? where game_id = ?";

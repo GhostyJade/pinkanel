@@ -92,7 +92,8 @@ public class BallRecognizer implements Runnable {
 				PinkanellMain.getMath().addPoint(p);
 				try {
 					Pinkadb.insertPoint(p.x(), p.y());
-				} catch (SQLException e) {
+				} catch (SQLException e) { //io penso sia un'errore a livello di accesso al database, btw, non so come funzionino
+					
 					//e.printStackTrace();
 				}		
 			}
@@ -106,7 +107,8 @@ public class BallRecognizer implements Runnable {
 	public void run() {
 		while (running) {
 			recognizeBall();
-			if (rendering)
+			if (rendering) //penso sia perchè gli manchino i dati di accesso...
+				//ma è un problema della fotocamera
 				render();
 		}
 	}
