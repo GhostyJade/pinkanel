@@ -106,6 +106,34 @@ public class Pinkadb {
 		System.out.println("Added a point");
 	}
 
+	
+	public static void endUpdate(int p1, int p2) throws SQLException {
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+		
+		
+		String query = "update games set points_p1 = ? where game_id = ?";
+		 java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		 preparedStmt.setInt(1, p1);
+		 preparedStmt.setInt(2, Constants.GAME_ID);
+		 preparedStmt.execute();
+		 
+		 String query1 = "update games set points_p2 = ? where game_id = ?";
+		 java.sql.PreparedStatement preparedStmt1 = conn.prepareStatement(query1);
+		 preparedStmt1.setInt(1, p2);
+		 preparedStmt1.setInt(2, Constants.GAME_ID);
+		 preparedStmt1.execute();
+		 
+		 String query2 = "update games set end_time = ? where game_id = ?";
+		 java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
+		 preparedStmt2.setTimestamp(1, timestamp );
+		 preparedStmt2.setInt(2, Constants.GAME_ID);
+		 preparedStmt2.execute();
+		 
+		 
+		 conn.close();
+		 System.out.println("Connection closed");
+	}
 }
 /*
  * public static int insertNewGame(int score1, int score2 ) throws SQLException

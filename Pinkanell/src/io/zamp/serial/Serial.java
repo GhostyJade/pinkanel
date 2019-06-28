@@ -3,6 +3,7 @@ package io.zamp.serial;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.swing.JOptionPane;
@@ -13,6 +14,7 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 import io.ghostyjade.pinkanell.PinkanellMain;
 import io.ghostyjade.utils.listener.GoalListener;
+import io.hmatte.pinkadb.Pinkadb;
 
 /**
  * This class provides a bridge between this application and the Arduino board
@@ -156,14 +158,18 @@ public class Serial implements SerialPortEventListener {
 	 * Assign the score to the correct team.
 	 * 
 	 * @param s the string received from Arduino board
+	 * @throws SQLException 
 	 */
-	private void assignPoint(String s) {
+	private void assignPoint(String s) throws SQLException {
 		if (s.contains("-1"))
 			return;
 		if (s.startsWith("1"))
 			point1 = Integer.parseInt(s.substring(1, s.length()));
 		if (s.startsWith("2"))
 			point2 = Integer.parseInt(s.substring(1, s.length()));
+		if (getTeamOneScore() == 10 || getTeamTwoScore() == 10 ) {
+			Pinkadb.endUpdate(getTeamOneScore(), getTeamTwoScore());
+		}
 	}
 
 	/**
