@@ -9,8 +9,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-MacOS"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RXTXlib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RxTxLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV-Windows"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="lib" path="/Users/micheletagliani/Downloads/mysql-connector-java-8.0.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/matte/Desktop/pinkanel/libs/mysql-connector-java-8.0.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

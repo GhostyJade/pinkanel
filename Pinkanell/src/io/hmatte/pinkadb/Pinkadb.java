@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
+
 import io.ghostyjade.utils.Constants;
 
 public class Pinkadb {
@@ -21,12 +23,10 @@ public class Pinkadb {
 			// The newInstance() call is a work around for some
 			// broken Java implementations
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://127.0.0.1:3306/pinkanell?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
-			String username = "pinkanell";
+			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
+			String username = "root";
 			String password = "toor";
 			Class.forName(driver);
-			//l'accesso al db provo una cosa
-			//ORA ERRORI NON NE DA APPENA SCHIACCIO P PER LA FOTOCAMERA PARTONO GLI ERRORI
 			conn = (Connection) DriverManager.getConnection(url, username, password);
 			System.out.println("Connected");
 
@@ -56,7 +56,7 @@ public class Pinkadb {
 
 		preparedStmt.execute();
 
-		String queryR = "SELECT * FROM localP.games order by game_id desc Limit 1;";
+		String queryR = "SELECT * FROM pinkadb.games order by game_id desc Limit 1;";
 
 		/*
 		 * String query2 = "update games set points_p1 = ? where game_id = ?";
@@ -88,14 +88,18 @@ public class Pinkadb {
 	}
 
 	public static void insertPoint(int x, int y) throws SQLException {
-
-		String query = " insert into dataBank (game_id, X, Y)" + " values (?, ?, ?)";
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+		
+		
+		String query = " insert into dataBank (game_id, X, Y, time)" + " values (?, ?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setInt (1, Constants.GAME_ID);
 		//preparedStmt.setInt(2, 0);
 		preparedStmt.setInt(2, x);
 		preparedStmt.setInt(3, y);
+		preparedStmt.setTimestamp(4, timestamp);
 		
 		preparedStmt.execute();
 

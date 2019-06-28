@@ -9,7 +9,7 @@ import java.util.Properties;
  */
 public class Constants {
 
-	/**
+	/**+
 	 * The minimum circle radius, used by ball detection
 	 */
 	public static final int MIN_CIRCLE_RADIUS = 1;

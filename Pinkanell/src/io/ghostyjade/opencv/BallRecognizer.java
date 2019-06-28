@@ -68,8 +68,9 @@ public class BallRecognizer implements Runnable {
 
 	/**
 	 * Try to recognize all the circle present in the grabbed frame.
+	 * @throws SQLException 
 	 */
-	public void recognizeBall() {
+	public void recognizeBall() throws SQLException {
 		points.clear();
 		Mat gray = new Mat();
 		cvtColor(cameraInstance.getCurrentFrame(), gray, COLOR_BGR2GRAY);
@@ -90,12 +91,8 @@ public class BallRecognizer implements Runnable {
 				// TODO move to BallRecognizer
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
-				try {
-					Pinkadb.insertPoint(p.x(), p.y());
-				} catch (SQLException e) { //io penso sia un'errore a livello di accesso al database, btw, non so come funzionino
-					
-					//e.printStackTrace();
-				}		
+				Pinkadb.insertPoint(p.x(), p.y());
+						
 			}
 		}
 	}
@@ -106,7 +103,12 @@ public class BallRecognizer implements Runnable {
 	@Override
 	public void run() {
 		while (running) {
-			recognizeBall();
+			try {
+				recognizeBall();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (rendering) //penso sia perchè gli manchino i dati di accesso...
 				//ma è un problema della fotocamera
 				render();
