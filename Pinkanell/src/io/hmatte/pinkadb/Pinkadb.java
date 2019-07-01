@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import io.ghostyjade.utils.Constants;
 
@@ -23,7 +22,7 @@ public class Pinkadb {
 			// The newInstance() call is a work around for some
 			// broken Java implementations
 			String driver = "com.mysql.cj.jdbc.Driver";
-			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
+			String url = "jdbc:mysql://127.0.0.1:3306/pinkadb?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false&useFractionalSeconds=true";
 			String username = "root";
 			String password = "toor";
 			Class.forName(driver);
@@ -45,7 +44,9 @@ public class Pinkadb {
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 
+	
 		String query = " insert into games ( start_time, end_time, points_p1, points_p2)" + " values ( ?, ?, ?, ?)";
+		
 
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
 
@@ -57,19 +58,6 @@ public class Pinkadb {
 		preparedStmt.execute();
 
 		String queryR = "SELECT * FROM pinkadb.games order by game_id desc Limit 1;";
-
-		/*
-		 * String query2 = "update games set points_p1 = ? where game_id = ?";
-		 * java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
-		 * preparedStmt2.setInt(1, i); preparedStmt2.setInt(2, e);
-		 * preparedStmt2.execute();
-		 * 
-		 * 
-		 * 
-		 * System.out.println("Inserted data");
-		 * 
-		 * conn.close(); System.out.println("Connection closed");
-		 */
 
 		Statement st = conn.createStatement();
 		st.execute(queryR);
@@ -89,20 +77,19 @@ public class Pinkadb {
 
 	public static void insertPoint(int x, int y) throws SQLException {
 		java.util.Date date = new java.util.Date();
-		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
-		
+		java.sql.Timestamp timestamp= new java.sql.Timestamp(date.getTime());
 		
 		String query = " insert into dataBank (game_id, X, Y, time)" + " values (?, ?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		
 		preparedStmt.setInt (1, Constants.GAME_ID);
-		//preparedStmt.setInt(2, 0);
 		preparedStmt.setInt(2, x);
 		preparedStmt.setInt(3, y);
 		preparedStmt.setTimestamp(4, timestamp);
 		
 		preparedStmt.execute();
-
+		
 		System.out.println("Added a point");
 	}
 
