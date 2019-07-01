@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.bytedeco.opencv.opencv_core.Point;
 
 import io.ghostyjade.utils.Constants;
 
@@ -75,11 +76,57 @@ public class Pinkadb {
 		return gameId;
 	}
 
+	public static void insertPoint2(Point p1, Point p2) throws SQLException {
+		java.util.Date date = new java.util.Date();
+		java.sql.Timestamp timestamp= new java.sql.Timestamp(date.getTime());
+		
+		double emme = (p2.y()-p1.y())/((p2.x()-p1.x()+0.1));
+		double mp = Math.atan(emme);
+		mp = Math.toDegrees(mp);
+		System.out.println(emme);
+		System.out.println(mp);
+		
+		if (mp - m > k || mp + m > k) {
+			m = mp;
+			String query = " insert into dataBank (game_id, X, Y, time, change_dir)" + " values (?, ?, ?, ?, ?)";
+			
+			java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+			
+			preparedStmt.setInt (1, Constants.GAME_ID);
+			preparedStmt.setInt(2, p1.x());
+			preparedStmt.setInt(3, p1.y());
+			preparedStmt.setTimestamp(4, timestamp);
+			preparedStmt.setInt(5, 1);
+
+			preparedStmt.execute();
+			
+			System.out.println("Added a point, rilevated change of direction");
+			
+		} else {
+		
+		String query = " insert into dataBank (game_id, X, Y, time, change_dir)" + " values (?, ?, ?, ?, ?)";
+		
+		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		
+		preparedStmt.setInt (1, Constants.GAME_ID);
+		preparedStmt.setInt(2, p1.x());
+		preparedStmt.setInt(3, p1.y());
+		preparedStmt.setTimestamp(4, timestamp);
+		preparedStmt.setInt(5, 0);
+
+		preparedStmt.execute();
+		
+		System.out.println("Added a point");
+		}
+	}
+	
 	public static void insertPoint(int x, int y) throws SQLException {
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp= new java.sql.Timestamp(date.getTime());
 		
-		String query = " insert into dataBank (game_id, X, Y, time)" + " values (?, ?, ?, ?)";
+		
+		
+		String query = " insert into dataBank (game_id, X, Y, time, change_id)" + " values (?, ?, ?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
 		
@@ -87,6 +134,8 @@ public class Pinkadb {
 		preparedStmt.setInt(2, x);
 		preparedStmt.setInt(3, y);
 		preparedStmt.setTimestamp(4, timestamp);
+		preparedStmt.setInt(5, 0);
+
 		
 		preparedStmt.execute();
 		
@@ -121,6 +170,23 @@ public class Pinkadb {
 		 conn.close();
 		 System.out.println("Connection closed");
 	}
+	
+	private static double m = 0;
+	private static int k = 25;
+	
+	/*public static void dirChange(Point p1, Point p2) throws SQLException {
+		int ci = 0;
+		double mp = (p2.y()-p1.y())/(p2.x()-p1.x());
+		
+		if (mp - m > k || mp + m < k) {
+			m = mp;
+			ci = 1;
+		}
+		
+		insertPoint(p2.x(), p2.y(), ci);
+		ci = 0;
+		
+	}*/
 }
 /*
  * public static int insertNewGame(int score1, int score2 ) throws SQLException

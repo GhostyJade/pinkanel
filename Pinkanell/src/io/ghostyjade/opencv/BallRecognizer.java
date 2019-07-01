@@ -9,6 +9,7 @@ import static org.bytedeco.opencv.global.opencv_imgproc.medianBlur;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bytedeco.opencv.global.opencv_imgproc;
@@ -55,7 +56,14 @@ public class BallRecognizer implements Runnable {
 	 * Is this rendering?
 	 */
 	private boolean rendering = false;
+	
+	/**
+	 * 
+	 *A vector of all recognized points
+	 */
      
+	private Vector<Point> poin =  new Vector<Point>();
+	
 	/**
 	 * Class constructor.
 	 * 
@@ -88,11 +96,15 @@ public class BallRecognizer implements Runnable {
 			circles.get(i).get(c);
 			Point p = new Point(Math.round(c[0]), Math.round(c[1]));
 			if (!(p.x() == 0 && p.y() == 0)) {
+				poin.add(p);
 				// TODO move to BallRecognizer
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
-				Pinkadb.insertPoint(p.x(), p.y());
-						
+				//Pinkadb.insertPoint(p.x(), p.y());
+				if (poin.size() > 3) {
+					Pinkadb.insertPoint2(poin.get(poin.size()-2), poin.get(poin.size()-3));
+				}
+				
 			}
 		}
 	}
@@ -109,8 +121,7 @@ public class BallRecognizer implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (rendering) //penso sia perchè gli manchino i dati di accesso...
-				//ma è un problema della fotocamera
+			if (rendering) 
 				render();
 		}
 	}
