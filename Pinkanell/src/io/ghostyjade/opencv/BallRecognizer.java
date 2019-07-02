@@ -101,8 +101,8 @@ public class BallRecognizer implements Runnable {
 				PinkanellMain.getWindow().setPoint(p);
 				PinkanellMain.getMath().addPoint(p);
 				//Pinkadb.insertPoint(p.x(), p.y());
-				if (poin.size() > 3) {
-					Pinkadb.insertPoint2(poin.get(poin.size()-2), poin.get(poin.size()-3));
+				if (poin.size() > 2) {
+					Pinkadb.insertPoint2(poin.get(poin.size()-1), poin.get(poin.size()-2));
 				}
 				
 			}
