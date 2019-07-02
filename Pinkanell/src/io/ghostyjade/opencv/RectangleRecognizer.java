@@ -42,11 +42,11 @@ public class RectangleRecognizer implements Runnable {
 		for(int i = 0; i < points.size(); i++) {
 			Rect r = boundingRect(points.get()[i]);
 			System.out.println("Mat " + i + "X: " + r.x() + " Y: " + r.y());
-		}
+		} //guyz io devo andare a mangiare, continuo dopo, plz caricatelo su git
 	}
 
 	public void render() {
-
+		
 	}
 
 	public void destroy() {
