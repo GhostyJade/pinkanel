@@ -37,9 +37,11 @@ public class RectangleRecognizer implements Runnable {
 
 	private boolean running = false;
 	private Mat result;
+	private VideoCapture cam;
 
 	public RectangleRecognizer(CameraFramer cameraInstance) {
 		this.cameraInstance = cameraInstance;
+		cam = new VideoCapture(0);
 		result = new Mat();
 		run();
 	}
@@ -60,7 +62,7 @@ public class RectangleRecognizer implements Runnable {
 		findContours(result, points, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
 		//System.out.println("VectorSize: " + points.size());
 		for (int i = 0; i < points.size(); i++) {
-			Rect r = boundingRect(points.get()[i]);
+			Rect r = boundingRect(points.get(i));
 			//System.out.println("Mat " + i + "X: " + r.x() + " Y: " + r.y() + " W: " + r.width() + " H: " + r.height());
 			rectangle(result,r,new Scalar(0));
 		}
@@ -77,6 +79,7 @@ public class RectangleRecognizer implements Runnable {
 	@Override
 	public void run() {
 		while (running) {
+			cam.read(cameraInstance.getCurrentFrame());
 			recognizeRectangle();
 		}
 	}

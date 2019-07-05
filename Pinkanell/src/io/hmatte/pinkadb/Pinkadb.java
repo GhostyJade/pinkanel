@@ -1,5 +1,11 @@
 package io.hmatte.pinkadb;
 
+/**
+ * This class is the intermediary between the Pinkanel system and the database.
+ * 
+ * @author hmatte
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -136,7 +142,7 @@ public class Pinkadb {
 		preparedStmt.setTimestamp(4, AMG);
 		preparedStmt.setInt(5, 0);
 
-		
+		//execute the prepared statement
 		preparedStmt.execute();
 		
 		//System.out.println("Added a point");
