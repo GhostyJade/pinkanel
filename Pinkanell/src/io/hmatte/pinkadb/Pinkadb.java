@@ -65,14 +65,14 @@ public class Pinkadb {
 		ResultSet rs = st.executeQuery(queryR);
 
 		rs.next();
-		String foundType = rs.getString(1);
+		foundType = rs.getString(1);
 
 		int gameId = rs.getInt("game_id");
 
 		Constants.GAME_ID = gameId;
 
-		System.out.println(gameId);
-		System.out.println(foundType);
+		//System.out.println(gameId);
+		//System.out.println(foundType);
 		return gameId;
 	}
 
@@ -83,8 +83,8 @@ public class Pinkadb {
 		double emme = (p2.y()-p1.y())/((p2.x()-p1.x()+0.1));
 		double mp = Math.atan(emme);
 		mp = Math.toDegrees(mp);
-		System.out.println(emme);
-		System.out.println(mp);
+		//System.out.println(emme);
+		//System.out.println(mp);
 		
 		if (mp - m > k || mp + m > k) {
 			m = mp;
@@ -100,14 +100,14 @@ public class Pinkadb {
 
 			preparedStmt.execute();
 			
-			System.out.println("Added a point, rilevated change of direction");
+			//System.out.println("Added a point, rilevated change of direction");
 			
 		} else {
 		
 		String query = " insert into dataBank (game_id, X, Y, time, change_dir)" + " values (?, ?, ?, ?, ?)";
 		
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
-		
+		 
 		preparedStmt.setInt (1, Constants.GAME_ID);
 		preparedStmt.setInt(2, p1.x());
 		preparedStmt.setInt(3, p1.y());
@@ -116,7 +116,7 @@ public class Pinkadb {
 
 		preparedStmt.execute();
 		
-		System.out.println("Added a point");
+		//System.out.println("Added a point");
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class Pinkadb {
 		
 		preparedStmt.execute();
 		
-		System.out.println("Added a point");
+		//System.out.println("Added a point");
 	}
 
 	
@@ -173,6 +173,7 @@ public class Pinkadb {
 	
 	private static double m = 0;
 	private static int k = 25;
+	private static String foundType;
 	
 	/*public static void dirChange(Point p1, Point p2) throws SQLException {
 		int ci = 0;

@@ -104,9 +104,9 @@ public class BallRecognizer implements Runnable {
 				if (poin.size() > 2) {
 					Pinkadb.insertPoint2(poin.get(poin.size()-1), poin.get(poin.size()-2));
 				}
-				
 			}
 		}
+		gray.release();
 	}
 
 	/**

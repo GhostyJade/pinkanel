@@ -71,7 +71,7 @@ public class PinkanellMain {
 		pinkadb = new Pinkadb();
 
 		try {
-			pinkadb.getConnection();
+			Pinkadb.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
