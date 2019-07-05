@@ -43,7 +43,7 @@ public class Pinkadb {
 	public static int insertData(int i, int e) throws SQLException {
 
 		java.util.Date date = new java.util.Date();
-		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+		java.sql.Timestamp AMG = new java.sql.Timestamp(date.getTime());
 
 	
 		String query = " insert into games ( start_time, end_time, points_p1, points_p2)" + " values ( ?, ?, ?, ?)";
@@ -51,8 +51,8 @@ public class Pinkadb {
 
 		java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
 
-		preparedStmt.setTimestamp(1, timestamp);
-		preparedStmt.setTimestamp(2, timestamp);
+		preparedStmt.setTimestamp(1, AMG);
+		preparedStmt.setTimestamp(2, AMG);
 		preparedStmt.setInt(3, i);
 		preparedStmt.setInt(4, e);
 
@@ -78,7 +78,7 @@ public class Pinkadb {
 
 	public static void insertPoint2(Point p1, Point p2) throws SQLException {
 		java.util.Date date = new java.util.Date();
-		java.sql.Timestamp timestamp= new java.sql.Timestamp(date.getTime());
+		java.sql.Timestamp AMG= new java.sql.Timestamp(date.getTime());
 		
 		double emme = (p2.y()-p1.y())/((p2.x()-p1.x()+0.1));
 		double mp = Math.atan(emme);
@@ -95,7 +95,7 @@ public class Pinkadb {
 			preparedStmt.setInt (1, Constants.GAME_ID);
 			preparedStmt.setInt(2, p1.x());
 			preparedStmt.setInt(3, p1.y());
-			preparedStmt.setTimestamp(4, timestamp);
+			preparedStmt.setTimestamp(4, AMG);
 			preparedStmt.setInt(5, 1);
 
 			preparedStmt.execute();
@@ -111,7 +111,7 @@ public class Pinkadb {
 		preparedStmt.setInt (1, Constants.GAME_ID);
 		preparedStmt.setInt(2, p1.x());
 		preparedStmt.setInt(3, p1.y());
-		preparedStmt.setTimestamp(4, timestamp);
+		preparedStmt.setTimestamp(4, AMG);
 		preparedStmt.setInt(5, 0);
 
 		preparedStmt.execute();
@@ -122,7 +122,7 @@ public class Pinkadb {
 	
 	public static void insertPoint(int x, int y) throws SQLException {
 		java.util.Date date = new java.util.Date();
-		java.sql.Timestamp timestamp= new java.sql.Timestamp(date.getTime());
+		java.sql.Timestamp AMG= new java.sql.Timestamp(date.getTime());
 		
 		
 		
@@ -133,7 +133,7 @@ public class Pinkadb {
 		preparedStmt.setInt (1, Constants.GAME_ID);
 		preparedStmt.setInt(2, x);
 		preparedStmt.setInt(3, y);
-		preparedStmt.setTimestamp(4, timestamp);
+		preparedStmt.setTimestamp(4, AMG);
 		preparedStmt.setInt(5, 0);
 
 		
@@ -145,7 +145,7 @@ public class Pinkadb {
 	
 	public static void endUpdate(int p1, int p2) throws SQLException {
 		java.util.Date date = new java.util.Date();
-		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
+		java.sql.Timestamp AMG = new java.sql.Timestamp(date.getTime());
 		
 		
 		String query = "update games set points_p1 = ? where game_id = ?";
@@ -162,7 +162,7 @@ public class Pinkadb {
 		 
 		 String query2 = "update games set end_time = ? where game_id = ?";
 		 java.sql.PreparedStatement preparedStmt2 = conn.prepareStatement(query2);
-		 preparedStmt2.setTimestamp(1, timestamp );
+		 preparedStmt2.setTimestamp(1, AMG );
 		 preparedStmt2.setInt(2, Constants.GAME_ID);
 		 preparedStmt2.execute();
 		 
