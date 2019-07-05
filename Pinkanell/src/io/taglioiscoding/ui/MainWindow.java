@@ -23,6 +23,10 @@ import io.ghostyjade.utils.Settings;
  * @author taglioIsCoding
  * @author GhostyJade
  * @since v1.0
+ * 
+ * hmatte says "oh, well, a good interface for MACZ, well, what's this racism for 
+ * windows PCs?! my Acer (skype certified) does not like it. 
+ * 
  */
 
 public class MainWindow {
@@ -32,7 +36,7 @@ public class MainWindow {
 	 */
 	private JFrame frame;
 	/**
-	 * The panels used to contain the hotmap and the camera preview
+	 * The panels used to contain the heatmap and the camera preview
 	 */
 	private JPanel heatmapPanel, cameraPanel;
 	/**

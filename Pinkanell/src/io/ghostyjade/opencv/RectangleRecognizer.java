@@ -31,6 +31,7 @@ import org.bytedeco.opencv.opencv_videoio.VideoCapture;
  * 
  * @author GhostyJade
  */
+
 public class RectangleRecognizer implements Runnable {
 
 	private CameraFramer cameraInstance;

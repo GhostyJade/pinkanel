@@ -12,6 +12,10 @@ import org.bytedeco.opencv.opencv_core.Point;
 /**
  * The heatmap shows how many times the ball has gone on a certain point.
  * 
+ * ma, scus, io non ho capito, ma e HEATMAP o HOTMAP?! credo/spero heatmap.
+ * ma trah, cioè quello bipolare che scrive una volta heatmap e poi hotmap non sono io
+ * <3 :D
+ * 
  * @author GhostyJade
  */
 public class HeatMap extends Canvas implements Runnable {

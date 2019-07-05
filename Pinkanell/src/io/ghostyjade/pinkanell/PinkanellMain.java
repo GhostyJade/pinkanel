@@ -15,6 +15,7 @@ import io.zamp.serial.Serial;
 
 /**
  * This is the main class of our program.
+ * And, we've to say this, WHAT A BEAUTIFUL MAIN! oh damn.
  * 
  * @author GhostyJade
  * @since v1.0

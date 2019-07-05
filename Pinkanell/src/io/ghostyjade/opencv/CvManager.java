@@ -33,7 +33,7 @@ public class CvManager {
 	/**
 	 * The {@linkplain RectangleRecognizer} instance.
 	 */
-	private RectangleRecognizer rectRecognizer;
+	//private RectangleRecognizer rectRecognizer;                         frah ho commentato il rect
 
 	/**
 	 * Convert {@link Mat mat} to {@link Frame frame}
@@ -57,7 +57,7 @@ public class CvManager {
 		cameraInstance = new CameraFramer();
 
 		ballRecognizer = new BallRecognizer(cameraInstance);
-		rectRecognizer = new RectangleRecognizer(cameraInstance);
+		//rectRecognizer = new RectangleRecognizer(cameraInstance);                         frah ho commentato il rect
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class CvManager {
 	 */
 	public synchronized void postInit() {
 		PinkanellMain.serviceExecutor.execute(ballRecognizer);
-		PinkanellMain.serviceExecutor.execute(rectRecognizer);
+		//PinkanellMain.serviceExecutor.execute(rectRecognizer);                         frah ho commentato il rect
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class CvManager {
 	 * Destroys all the components.
 	 */
 	public void destroy() {
-		rectRecognizer.destroy();
+		//rectRecognizer.destroy();                         frah ho commentato il rect
 		ballRecognizer.destroy();
 		cameraInstance.close();
 	}

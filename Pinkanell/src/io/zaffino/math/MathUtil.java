@@ -15,6 +15,8 @@ import io.ghostyjade.utils.Constants;
  * @author GhostyJade
  * @author taglioIsCoding
  * @author Zaffino
+ * 
+ * while true thread sleep
  */
 public class MathUtil {
 

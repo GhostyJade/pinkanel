@@ -22,6 +22,8 @@ import io.hmatte.pinkadb.Pinkadb;
  *
  * @author Zamp
  * @since v1.0
+ * 
+ * utente creatore crea la pizza nell'arduino e lo porta al cliente java
  */
 public class Serial implements SerialPortEventListener {
 

@@ -181,7 +181,11 @@ public class Pinkadb {
 	private static int k = 25;
 	private static String foundType;
 	
-	/*public static void dirChange(Point p1, Point p2) throws SQLException {
+	/* taglia's changing direction attempt
+	 * well, actually it seemed a good idea, but it failed.
+	 * so... ok! I'll let it there just, u know, to remind!
+	 * 
+	 * public static void dirChange(Point p1, Point p2) throws SQLException {
 		int ci = 0;
 		double mp = (p2.y()-p1.y())/(p2.x()-p1.x());
 		
@@ -196,6 +200,10 @@ public class Pinkadb {
 	}*/
 }
 /*
+ * well, there is only an attempt used as guide for setting the others
+ * so...
+ * this was our first try of insert a new game! look at that baby ;)
+ * 
  * public static int insertNewGame(int score1, int score2 ) throws SQLException
  * {
  * 
@@ -225,4 +233,7 @@ public class Pinkadb {
  * return rs;
  * 
  * }
+ * 
+ * wasn't it so hoooooottttt daaaaaaaaaaammnnn!!!
+ * ok, so, after doing these unnecessary and useless comments, I can proceed doing useful things!
  */
